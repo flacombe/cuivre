@@ -1,0 +1,18 @@
+{
+  "tilejson": "2.2.0",
+  "name": "infosreseaux-cuivre",
+  "attribution": "<a href=\"https://www.openstreetmap.org/copyright\">© OpenStreetMap contributors</a>, Infos-Réseaux.com, Orange, ARCEP",
+  "bounds": [-180, -85.0511, 180, 85.0511],
+  "center": [0, 0, 0],
+  "format": "pbf",
+  "minzoom": 2,
+  "maxzoom": 15,
+  "tiles": ["https://cuivre.infos-reseaux.com/tiles/{z}/{x}/{y}.pbf"],
+  "vector_layers": [
+    {"id": "communes", "description": "Communes et leur état de fermeture cuivre", "fields": {}},
+    {"id": "communes_points", "description": "Centroïdes des communes et leur état de fermeture cuivre", "fields": {}},
+    {"id": "cuivre_adresses", "description": "Adresses desservies par le réseau cuivre", "fields": {}},
+    {"id": "fibre_adresses", "description": "Adresses desservies par les réseaux FTTH", "fields": {}},
+    {"id": "cuivre_fibre_liens", "description": "Relations entre les adresses cuivre et fibre", "fields": {}}
+  ]
+}

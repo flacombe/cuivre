@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Le cuivre raccorche</title>
+    <meta name="description" content="Application française d'exploration du programme de fermeture du réseau cuivre" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@InfosReseaux" />
+    <meta name="twitter:creator" content="@InfosReseaux" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Application française d'exploration du programme de fermeture du réseau cuivre" />
+    <meta property="og:title" content="Le cuivre raccroche" />
+
+    <!-- Matomo -->
+    <script>
+      var _paq = window._paq = window._paq || [];
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="https://stats.openstreetmap.fr/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '9']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <!-- End Matomo Code -->
+  </head>
+  <body>
+    <noscript>You must have Javascript enabled to view Cuivre</noscript>
+    <div id="container" style="display:none">
+      <header>
+        <div class="float-left text-left">
+          <div class="float-left mr-2 mb-1"><img src="img/copper_cut.svg" alt="Logo" height="35"/></div>
+          <h1>Le cuivre raccroche</h1>
+          <div class="d-inline-block ml-2"><a class="text-secondary" href="/about-fr.html">A&nbsp;propos</a>&nbsp;&ndash;&nbsp;<a class="text-secondary" href="/legal.html">Mentions&nbsp;légales</a></div>
+          <div style="clear:left;">Préparez la transition vers la fibre optique.</div>
+        </div>
+      </header>
+      <div id="map"></div>
+    </div>
+    <script type="module" src="/src/index.ts"></script>
+  </body>
+</html>

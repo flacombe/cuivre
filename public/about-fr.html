@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A propos &mdash;Fermeture du cuivre </title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Matomo -->
+  <script>
+    var _paq = window._paq = window._paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="https://stats.openstreetmap.fr/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '9']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+<body>
+   <div class="container">
+	<header>
+      <h1><img src="img/copper_cut.svg" alt="Logo" height="50"/>&nbsp;Le cuivre raccroche</h1>
+	</header>
+    <div class="row">
+      <div class="col-lg-6">
+
+      <p class="lead"><a href="/">Cette application</a> propose une vue cartographique du programme de fermeture du
+        réseau cuivre et de la complétude FTTH associée dans chaque commune.</p>
+      <p>Il était jusqu'à récemment difficile de se rendre compte des disparités entre la desserte du réseau cuivre
+        et de celle de la fibre alors que le second est appelé à remplacer le premier dans le plus de locaux possibles.</p>
+
+      <h2>Le programme de fermeture du réseau cuivre</h2>
+      <p>Orange, en charge de l'exploitation du réseau cuivre a présenté <a href="https://www.arcep.fr/nos-sujets/la-fermeture-du-reseau-cuivre.html" target="_blank">un plan de fermeture</a> de ce réseau
+        devant à terme être remplacé par la nouvelle infrastructure en fibre optique.</p>
+      <p>Différentes pages en expliquent les tenants et aboutissants, parmi lesquelles :
+        <ul>
+          <li><a href="https://reseaux.orange.fr/nos-reseaux/modernisation-des-reseaux/evolution-de-la-telephonie-fixe-et-internet" target="_blank">La modernisation des réseaux</a> par Orange</li>
+          <li><a href="https://www.economie.gouv.fr/treshautdebit" target="_blank">Le site gouvernenemental</a></li>
+          <li><a href="https://www.arcep.fr/nos-sujets/la-fermeture-du-reseau-cuivre.html" target="_blank">Le site de l'ARCEP</a></li>
+        </ul>
+      </p>
+      <p>Le programme se déroule selon un calendrier progressif sur 10 ans, partant d'expérimentations
+        sur des périmètres réduits jusqu'à des phases industrielles de plusieurs milions de locaux.
+      <br/>Il est donc particulièrement utile de disposer d'outils efficaces pour en comprendre
+        le déroulement et s'adapter à ce que cela implique. Cette application prétend répondre à une partie de ces besoins.</p>
+      
+      <h2>Quelles données sont utilisées ?</h2>
+        
+        <h3>Périmètres administratifs</h3>
+        <p>Les périmètres communaux connus d'OpenStreetMap sont utilisés pour tracer le périmètre et calculer les centroïdes des communes.</p>
+
+        <h3>Données du réseau cuivre</h3>
+        <p>L'article 28 de <a href="https://www.arcep.fr/uploads/tx_gsavis/23-2802.pdf" target="_blank">la décision ARCEP 2023-2802</a> encadre la publication des données utilisées par cette application.
+          <br/>Leur format est précisé dans l'annexe 2b §2.1.2a de la même décision.
+        </p>
+        <p>Les données relatives au programme de fermeture et les adresses desservies par le réseau
+          cuivre sont ainsi publiées par Orange France sur son <a href="https://gallery.orange.com/reseaux/?v=11c9b041-420b-47f3-8a91-8a9adbe2a86a" target="_blank">site internet institutionnel</a>
+        </p>
+
+        <h3>Données des réseaux fibre</h3>
+        <p>Les données descriptives des adresses desservies par les réseaux fibre sont publiées par l'ARCEP
+          dans le cadre de ses études de marché du Très Haut Débit et de sa collecte de données auprès des opérateurs.
+          <br/>Elles sont disponibles sur <a href="https://www.data.gouv.fr/fr/datasets/le-marche-du-haut-et-tres-haut-debit-fixe-deploiements/" target="_blank">le site gouvernemental data.gouv.fr</a>.
+        </p>
+        
+      <h2>Quelles technologies sont utilisées ?</h2>
+      <p>Les outils suivants sont mis en oeuvre pour permettre à cette carte d'exister :</p>
+      <ul>
+        <li><a href="https://www.postgresql.org/">PostgreSQL</a>/<a href="http://postgis.net/">PostGIS</a> pour le stockage
+        <li><a href="https://imposm.org/">Imposm3</a> pour filtrer et importer les données OpenStreetMap
+        <li><a href="http://tegola.io/">Tegola</a> pour générer et servir des tuiles vectorielles
+	      <li><a href="https://maplibre.org/maplibre-gl-js/docs/">Maplibre GL JS</a> pour l'interface web</li>
+      </ul>
+      
+      <p>Le fond de carte est gracieusement fourni par <a href="https://www.maptiler.com/"><img width="150px" src="img/maptiler.png"></a>.</p>
+
+      <h2>Où se trouve le code ?</h2>
+      <p>Le dépot officiel du projet est situé sur <a href="https://github.com/flacombe/cuivre">GitHub</a>. Des mises à jour sont régulièrement apportées.</p>
+      <p>Il s'agit d'un fork d'<a href="https://www.openinframap.org">OpenInfraMap</a> dont le code est également disponible sur <a href="https://github.com/openinframap">GitHub</a>.
+      
+      <h2>Qui a fait ça ?</h2>
+      <p><a href="https://russ.garrett.co.uk">Russ</a> et <a href="https://github.com/flacombe">François</a>, passionés par les infrastructures.</p>
+      <p>L'hébergement est actuellement assuré par <a href="https://www.openstreetmap.fr/">l'association OpenStreetMap France</a></p>
+
+      </div>
+      <div class="col-lg-4">
+        <a class="twitter-timeline" data-width="390" data-height="800" href="https://twitter.com/InfosReseaux?ref_src=twsrc%5Etfw">InfosReseaux.com</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+      </div>
+    </div>
+  </div>
+</body>
+</html>
