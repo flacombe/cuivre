@@ -1,19 +1,28 @@
-
 import { LayerSpecificationWithZIndex } from './types.js'
+import {poleRadius_p} from './common.js';
+
+const fibreColor = '#1c9100';
+
 
 const layers: LayerSpecificationWithZIndex[] = [
   {
     zorder: 400,
     id: 'fibre_adresses',
-    type: 'fill',
+    type: 'circle',
     source: 'cuivre',
-    minzoom: 11,
+    minzoom: 10,
     'source-layer': 'fibre_adresses',
     paint: {
-      'fill-opacity': 0.65,
-      'fill-color': "#3e6651",
-      'fill-outline-color': "#003519"
-    },
+      'circle-radius': poleRadius_p,
+      'circle-color': fibreColor,
+      'circle-stroke-color': "#9C9C9C",
+      'circle-stroke-width': ['interpolate', ['linear'], ['zoom'],
+          5, 0,
+          6, 0.1,
+          14, 0.5,
+          17, 3
+      ]
+    }
   }
 
 ];
