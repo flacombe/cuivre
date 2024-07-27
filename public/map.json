@@ -12,7 +12,7 @@
     {"id": "communes", "description": "Communes et leur état de fermeture cuivre", "fields": {}},
     {"id": "communes_points", "description": "Centroïdes des communes et leur état de fermeture cuivre", "fields": {}},
     {"id": "cuivre_adresses", "description": "Adresses desservies par le réseau cuivre", "fields": {}},
-    {"id": "ftth_adresses", "description": "Adresses desservies par les réseaux FTTH", "fields": {}},
+    {"id": "fibre_adresses", "description": "Adresses desservies par les réseaux FTTH", "fields": {}},
     {"id": "cuivre_fibre_liens", "description": "Relations entre les adresses cuivre et fibre", "fields": {}}
   ]
 }
