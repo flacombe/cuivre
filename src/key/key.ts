@@ -1,9 +1,6 @@
 import { IControl } from 'maplibre-gl'
 import {el, mount, list, setStyle, RedomElement} from 'redom';
-import {materialColor_scale} from '../style/common.js';
-import {powerColor} from '../style/style_cu_communes.js';
-import {telecomColor, mediumColor_scale} from '../style/style_cu_cuivre.js';
-import {svgLine, svgCircle} from './svg.js';
+import {svgCircle} from './svg.js';
 import './key.css';
 // @ts-expect-error Vite virtual module
 import { manifest } from 'virtual:render-svg'
@@ -91,40 +88,15 @@ class KeyControl implements IControl {
     mount(this._container, this.header());
 
     let pane = el('.oim-key-pane');
-    pane.appendChild(el('h4', 'Supports'));
-    mount(pane, await this.supportsTable());
-    pane.appendChild(el('h4', 'Energie'));
-    mount(pane, this.powerTable());
-    pane.appendChild(el('h4', 'Télécoms'));
-    mount(pane, await this.telecomTable());
+    pane.appendChild(el('h4', 'Communes'));
+    mount(pane, this.communeTable());
+    pane.appendChild(el('h4', 'Cuivre'));
+    mount(pane, this.cuivreTable());
+    pane.appendChild(el('h4', 'Fibre'));
+    mount(pane, this.fibreTable());
     this._pane = pane;
 
     mount(this._container, pane);
-  }
-
-  async supportsTable() {
-    let rows = [];
-    for (let row of materialColor_scale) {
-      let label = row[0];
-      if (row[1] == null){
-        continue;
-      }
-      if (label === null) {
-        label = 'Commun';
-      } else {
-        label = `${label}`;
-      }
-
-      rows.push([label, row[1]]);
-    }
-
-    rows = rows.map(row => [row[0], svgCircle(row[1], 'grey', 1, 8, 0)]);
-    rows.push(['Pylône', await this.sprite('power_tower')]);
-    rows.push(['Transition aéro-sout', await this.sprite('power_pole_transition')]);
-
-    let table = list('table', Tr);
-    table.update(rows);
-    return table;
   }
 
   async sprite(name: string, size = 25) {
@@ -138,9 +110,9 @@ class KeyControl implements IControl {
     return spriteDiv as unknown as SVGElement
   }
 
-  powerTable() {
+  communeTable() {
     let rows = [
-      ['Appui élec', svgCircle("#dedede", powerColor, 1, 8, 3)],
+      ['Appui élec', svgCircle("#dedede", "#DD0000", 1, 8, 3)],
     ];
     
     let table = list('table', Tr);
@@ -148,28 +120,16 @@ class KeyControl implements IControl {
     return table;
   }
 
-  async telecomTable() {
-    let rows = [];
-    for (let row of mediumColor_scale) {
-      let label = row[0];
-      if (row[1] == null){
-        continue;
-      }
-      if (label === null) {
-        label = 'Artère inconnue';
-      } else {
-        label = `Artère ${label}`;
-      }
-
-      rows.push([label, row[1]]);
-    }
-
-    rows = rows.map(row => [row[0], svgLine(row[1], 2, '6 3')]);
-    rows.push(['Appui télécom', svgCircle("#dedede", telecomColor, 1, 8, 3)]);
-    rows.push(['Pylône radio', await this.sprite('comms_tower')]);
+  cuivreTable() {
 
     let table = list('table', Tr);
-    table.update(rows);
+    //table.update(rows);
+    return table;
+  }
+
+  fibreTable() {
+    let table = list('table', Tr);
+    //table.update(rows);
     return table;
   }
 }
