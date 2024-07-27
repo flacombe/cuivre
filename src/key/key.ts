@@ -1,8 +1,8 @@
 import { IControl } from 'maplibre-gl'
 import {el, mount, list, setStyle, RedomElement} from 'redom';
 import {materialColor_scale} from '../style/common.js';
-import {powerColor} from '../style/style_gsp_power.js';
-import {telecomColor, mediumColor_scale} from '../style/style_gsp_telecoms.js';
+import {powerColor} from '../style/style_cu_communes.js';
+import {telecomColor, mediumColor_scale} from '../style/style_cu_cuivre.js';
 import {svgLine, svgCircle} from './svg.js';
 import './key.css';
 // @ts-expect-error Vite virtual module

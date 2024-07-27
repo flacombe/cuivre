@@ -3,12 +3,12 @@ import { LayerSpecificationWithZIndex } from './types.js'
 
 const layers: LayerSpecificationWithZIndex[] = [
   {
-    zorder: 40,
-    id: 'vegetation_forest',
+    zorder: 400,
+    id: 'fibre_adresses',
     type: 'fill',
-    source: 'natural',
+    source: 'cuivre',
     minzoom: 11,
-    'source-layer': 'forest',
+    'source-layer': 'fibre_adresses',
     paint: {
       'fill-opacity': 0.65,
       'fill-color': "#3e6651",
@@ -18,4 +18,4 @@ const layers: LayerSpecificationWithZIndex[] = [
 
 ];
 
-export {layers as vegetationLayers};
+export {layers as fibreLayers};

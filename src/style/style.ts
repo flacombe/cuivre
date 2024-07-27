@@ -2,19 +2,15 @@ import { StyleSpecification } from 'maplibre-gl'
 
 const style: StyleSpecification = {
   version: 8,
-  name: "Gespot",
+  name: "Infosreseaux-cuivre",
   sources: {
     openmaptiles: {
       type: "vector",
       url: "https://api.maptiler.com/tiles/v3/tiles.json?key=2raHq2ahXwNHsKorHH5t"
     },
-    gespot: {
+    cuivre: {
       type: "vector",
-      url: "https://gespot.fr/map.json"
-    },
-    natural: {
-      type: "vector",
-      url: "https://gespot.fr/natural.json"
+      url: "https://cuivre.infos-reseaux.com/map.json"
     }
   },
   glyphs: '/fonts/{fontstack}/{range}.pbf',

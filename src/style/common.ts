@@ -19,8 +19,6 @@ const operator_text: ExpressionSpecification = [
   ['case', ['has', 'operator'], ['concat', ['get', 'name'], ' (', ['get', 'operator'], ')'], ['get', 'name']]
 ]
 
-const construction_p: ExpressionSpecification = ['get', 'construction'];
-
 // Colors
 function scale_color(tag: string, scale: { [key: string]: any }[]): DataDrivenPropertyValueSpecification<string> {
   let result: any = ['match', ["get", tag]];
@@ -37,37 +35,30 @@ function scale_color(tag: string, scale: { [key: string]: any }[]): DataDrivenPr
   return result;
 }
 
-const materialColor_scale = [
-  ['wood', '#815727'],
-  ['metal', '#99a89e'], // deprecated
-  ['steel', '#99a89e'],
-  ['concrete', '#4d4d4d'],
-  ['composite', '#6087b8'], // deprecated
-  ['epoxy', '#6087b8'],
-  [null,'#dedede']
-];
-
 const poleRadius_p: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'],
   5, 0,
   14, 2,
   17, 5.5
 ];
 
-const underground_p: ExpressionSpecification = [
-  'any',
-  ['==', ['get', 'location'], 'underground'],
-  ['==', ['get', 'location'], 'underwater'],
-  ['==', ['get', 'tunnel'], true],
-  [
-    'all', // Power cables are underground by default
-    ['==', ['get', 'type'], 'cable'],
-    ['==', ['get', 'location'], '']
-  ]
-]
+/*
+const lot_scale = {
+  "Expe1":"#DD0000",
+  "Expe2":"#ffc107",
+  "ExpeZTD":"#ffc107",
+  "1":"#17a2b8",
+  "2":"#17a2b8",
+  "3":"#17a2b8",
+  "4":"#17a2b8",
+  "5":"#17a2b8",
+  "6":"#17a2b8",
+  "Preselectionlot4":"#17a2b8"
+};
+*/
 
 // Function to assign opacity to lines according to zoom
 const lineOpacity_p: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], 9, 1, 10, 0.6, 14, 0.3]
 
 const font = ['Noto Sans Regular']
 
-export {scale_color, text_paint, operator_text, construction_p, underground_p, poleRadius_p, materialColor_scale, lineOpacity_p, font }
+export {scale_color, text_paint, operator_text, poleRadius_p, lineOpacity_p, font }
