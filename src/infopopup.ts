@@ -16,7 +16,7 @@ const hidden_keys = [
   'is_node',
   'area',
   'gid',
-  'Com_id',
+  'com_id',
   'com_nom',
   'cuivre_id',
   'fibre_id'
@@ -124,27 +124,6 @@ class InfoPopup {
     return container
   }
 
-  voltageField(feature: MapGeoJSONFeature): RedomElement {
-    const voltages = new Set(
-      Object.keys(feature.properties)
-        .filter((key) => key.startsWith('voltage'))
-        .map((key) => parseFloat(feature.properties[key]))
-    )
-
-    let text = [...voltages]
-      .sort((a, b) => a - b)
-      .reverse()
-      .map((val) => val.toString())
-      .join('/')
-    text += ' kV'
-
-    if (feature.properties['frequency']) {
-      text += ` ${feature.properties['frequency'].replace(';', '/')} Hz`
-    }
-
-    return el('span.voltages', text)
-  }
-
   popupHtml(feature: MapGeoJSONFeature) {
     const attrs_table = el('table', { class: 'item_info' })
     const renderedProperties = Object.keys(feature.properties)
@@ -154,10 +133,6 @@ class InfoPopup {
     setChildren(attrs_table, renderedProperties)
 
     const content = el('div', this.nameTags(feature))
-
-    if (feature.properties['voltage']) {
-      mount(content, this.voltageField(feature))
-    }
 
     const links_container = el('div')
     const wikidata_div = el('div')
@@ -185,15 +160,6 @@ class InfoPopup {
     }
     mount(content, links_container)
 
-    if (feature.layer.id.startsWith('power_plant')) {
-      mount(
-        content,
-        el('a', 'More info', {
-          href: '/stats/object/plant/' + feature.properties['osm_id'],
-          target: '_blank'
-        })
-      )
-    }
     return content
   }
 
