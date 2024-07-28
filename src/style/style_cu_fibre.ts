@@ -1,5 +1,5 @@
 import { LayerSpecificationWithZIndex } from './types.js'
-import {dotRadius_p} from './common.js';
+import {dotRadius_p, dotStroke_p} from './common.js';
 
 const fibreColor = '#1c9100';
 
@@ -16,12 +16,7 @@ const layers: LayerSpecificationWithZIndex[] = [
       'circle-radius': dotRadius_p,
       'circle-color': fibreColor,
       'circle-stroke-color': "#9C9C9C",
-      'circle-stroke-width': ['interpolate', ['linear'], ['zoom'],
-          5, 0,
-          6, 0.1,
-          14, 0.5,
-          17, 3
-      ]
+      'circle-stroke-width': dotStroke_p
     }
   }
 

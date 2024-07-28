@@ -41,6 +41,12 @@ const dotRadius_p: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'
   17, 5.5
 ];
 
+const dotStroke_p:ExpressionSpecification = ['interpolate', ['linear'], ['zoom'],
+  10, 0.1,
+  14, 0.5,
+  17, 1
+]
+
 const lotColor_scale = [
   ["Expe1", "#006cff"],
   ["Expe2", "#0094ff"],
@@ -67,4 +73,4 @@ const lotColor_scale = [
 
 const font = ['Noto Sans Regular']
 
-export {scale_color, text_paint, operator_text, lotColor_scale, dotRadius_p, font }
+export {scale_color, text_paint, operator_text, lotColor_scale, dotRadius_p, dotStroke_p, font }

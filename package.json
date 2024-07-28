@@ -33,10 +33,7 @@
   },
   "dependencies": {
     "@types/bootstrap": "^4.6.2",
-    "@types/bootstrap-slider": "^11.0.2",
-    "@types/jquery": "^3.5.1",
     "bootstrap": "^4.6.2",
-    "bootstrap-slider": "^11.0.2",
     "lodash.invert": "^4.3.0",
     "lodash.isequal": "^4.5.0",
     "lodash.sortby": "^4.7.0",

@@ -8,7 +8,7 @@ const communeOpacity_p: ExpressionSpecification = ['interpolate', ['linear'], ['
 const layers: LayerSpecificationWithZIndex[] = [
   {
     zorder: 100,
-    id: 'commune_area',
+    id: 'communes_area',
     type: 'fill',
     source: 'cuivre',
     'source-layer': 'communes',
@@ -21,7 +21,7 @@ const layers: LayerSpecificationWithZIndex[] = [
   },
   {
     zorder: 101,
-    id: 'commune_point',
+    id: 'communes_point',
     type: 'circle',
     source: 'cuivre',
     maxzoom: 7,

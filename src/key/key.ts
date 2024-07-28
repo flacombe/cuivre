@@ -1,9 +1,12 @@
 import { IControl } from 'maplibre-gl'
 import {el, mount, list, setStyle, RedomElement} from 'redom';
-import {svgCircle} from './svg.js';
+import {svgRect, svgCircleFromLayer} from './svg.js';
 import './key.css';
 // @ts-expect-error Vite virtual module
 import { manifest } from 'virtual:render-svg'
+import {lotColor_scale} from '../style/common.js';
+import {cuivreLayers} from '../style/style_cu_cuivre.js';
+import {fibreLayers} from '../style/style_cu_fibre.js';
 
 class Td {
   el: HTMLTableCellElement
@@ -111,26 +114,46 @@ class KeyControl implements IControl {
   }
 
   communeTable() {
-    let rows = [
-      ['Appui élec', svgCircle("#dedede", "#DD0000", 1, 8, 3)],
-    ];
-    
+    let rows = [];
+    for (let row of lotColor_scale) {
+      let label = row[0];
+      if (row[1] == null){
+        continue;
+      }
+      if (label === null) {
+        label = 'Non programmée';
+      } else {
+        label = `Lot ${label}`;
+      }
+
+      rows.push([label, row[1]]);
+    }
+
+    rows = rows.map(row => [row[0], svgRect(row[1], 'grey', 1)]);
+
     let table = list('table', Tr);
     table.update(rows);
     return table;
   }
 
   cuivreTable() {
+    const rows = [
+      ['Adresse', svgCircleFromLayer(cuivreLayers, 'cuivre_adresses')]
+    ]
 
-    let table = list('table', Tr);
-    //table.update(rows);
-    return table;
+    const table = list('table', Tr)
+    table.update(rows)
+    return table
   }
 
   fibreTable() {
-    let table = list('table', Tr);
-    //table.update(rows);
-    return table;
+    const rows = [
+      ['Adresse', svgCircleFromLayer(fibreLayers, 'fibre_adresses')]
+    ]
+    
+    const table = list('table', Tr)
+    table.update(rows)
+    return table
   }
 }
 

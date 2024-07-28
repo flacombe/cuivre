@@ -50,7 +50,7 @@ function init() {
     'Cuivre': 'cuivre_',
     'Fibre': 'fibre_',
   };
-  const layers_enabled = ['Electricité', 'Télécoms'];
+  const layers_enabled = ['Communes', 'Cuivre', 'Fibre'];
   const layer_switcher = new LayerSwitcher(layers, layers_enabled);
   var url_hash = new URLHash(layer_switcher);
   layer_switcher.urlhash = url_hash;
