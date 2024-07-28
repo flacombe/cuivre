@@ -3,7 +3,7 @@ import { ExpressionSpecification } from 'maplibre-gl'
 import {scale_color, lotColor_scale} from './common.js';
 
 
-const communeOpacity_p: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], 9, 1, 10, 0.6, 14, 0.3]
+const communeOpacity_p: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], 8, 0.6, 14, 0.15]
 
 const layers: LayerSpecificationWithZIndex[] = [
   {
@@ -24,7 +24,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     id: 'commune_point',
     type: 'circle',
     source: 'cuivre',
-    maxzoom: 8,
+    maxzoom: 7,
     'source-layer': 'communes_points',
     paint: {
       'circle-radius': ['interpolate', ['linear'], ['zoom'],
