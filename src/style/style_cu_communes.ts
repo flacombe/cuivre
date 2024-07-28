@@ -28,9 +28,8 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'communes_points',
     paint: {
       'circle-radius': ['interpolate', ['linear'], ['zoom'],
-        5, 0,
-        14, 2,
-        17, 5.5
+        0, 0.3,
+        8, 3
       ],
       'circle-color': scale_color("com_lot", lotColor_scale),
       'circle-stroke-color': "#9C9C9C",
