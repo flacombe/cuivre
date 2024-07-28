@@ -35,30 +35,35 @@ function scale_color(tag: string, scale: { [key: string]: any }[]): DataDrivenPr
   return result;
 }
 
-const poleRadius_p: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'],
+const dotRadius_p: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'],
   5, 0,
   14, 2,
   17, 5.5
 ];
 
-/*
-const lot_scale = {
-  "Expe1":"#DD0000",
-  "Expe2":"#ffc107",
-  "ExpeZTD":"#ffc107",
-  "1":"#17a2b8",
-  "2":"#17a2b8",
-  "3":"#17a2b8",
-  "4":"#17a2b8",
-  "5":"#17a2b8",
-  "6":"#17a2b8",
-  "Preselectionlot4":"#17a2b8"
-};
-*/
+const lotColor_scale = [
+  ["Expe1", "#006cff"],
+  ["Expe2", "#0094ff"],
+  ["ExpeZTD", "#ffc107"],
+  ["1", "#ffc39c"],
+  ["2", "#ffaf7b"],
+  ["3", "#ff9754"],
+  ["4", "#ff802e"],
+  ["5", "#ff761e"],
+  ["6", "#c95e19"],
+  ["7", "#ff6600"],
+  ["Preselectionlot1", "#ff6600"],
+  ["Preselectionlot2", "#ff6600"],
+  ["Preselectionlot3", "#ff6600"],
+  ["Preselectionlot4", "#ff6600"],
+  ["Preselectionlot5", "#ff6600"],
+  ["Preselectionlot6", "#ff6600"],
+  ["Preselectionlot7", "#ff6600"],
+];
 
 // Function to assign opacity to lines according to zoom
-const lineOpacity_p: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], 9, 1, 10, 0.6, 14, 0.3]
+
 
 const font = ['Noto Sans Regular']
 
-export {scale_color, text_paint, operator_text, poleRadius_p, lineOpacity_p, font }
+export {scale_color, text_paint, operator_text, lotColor_scale, dotRadius_p, font }

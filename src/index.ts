@@ -10,7 +10,6 @@ import LayerSwitcher from '@russss/maplibregl-layer-switcher'
 import URLHash from '@russss/maplibregl-layer-switcher/urlhash'
 import { LayerSpecificationWithZIndex } from './style/types.js'
 
-import EditButton from './editbutton.js'
 import InfoPopup from './infopopup.js'
 import KeyControl from './key/key.js'
 
@@ -92,7 +91,6 @@ function init() {
 
   map.addControl(new KeyControl(), 'top-right')
   map.addControl(layer_switcher, 'top-right')
-  map.addControl(new EditButton(), 'bottom-right')
   new InfoPopup(
     cu_layers.map((layer: { [x: string]: any }) => layer['id']),
     9

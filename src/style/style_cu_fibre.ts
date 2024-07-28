@@ -1,5 +1,5 @@
 import { LayerSpecificationWithZIndex } from './types.js'
-import {poleRadius_p} from './common.js';
+import {dotRadius_p} from './common.js';
 
 const fibreColor = '#1c9100';
 
@@ -13,7 +13,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 10,
     'source-layer': 'fibre_adresses',
     paint: {
-      'circle-radius': poleRadius_p,
+      'circle-radius': dotRadius_p,
       'circle-color': fibreColor,
       'circle-stroke-color': "#9C9C9C",
       'circle-stroke-width': ['interpolate', ['linear'], ['zoom'],
@@ -27,4 +27,4 @@ const layers: LayerSpecificationWithZIndex[] = [
 
 ];
 
-export {layers as fibreLayers};
+export {layers as fibreLayers, fibreColor};

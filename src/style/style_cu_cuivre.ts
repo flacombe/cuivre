@@ -1,5 +1,5 @@
 import { LayerSpecificationWithZIndex } from './types.js'
-import {poleRadius_p} from './common.js';
+import {dotRadius_p} from './common.js';
 
 const cuivreColor = '#ff8900';
 
@@ -12,7 +12,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 10,
     'source-layer': 'cuivre_adresses',
     paint: {
-      'circle-radius': poleRadius_p,
+      'circle-radius': dotRadius_p,
       'circle-color': cuivreColor,
       'circle-stroke-color': "#9C9C9C",
       'circle-stroke-width': ['interpolate', ['linear'], ['zoom'],
@@ -42,4 +42,4 @@ const layers: LayerSpecificationWithZIndex[] = [
   }
 ];
 
-export {layers as cuivreLayers};
+export {layers as cuivreLayers, cuivreColor};
