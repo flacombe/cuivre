@@ -59,6 +59,7 @@ const lotColor_scale = [
   ["Preselectionlot5", "#ff6600"],
   ["Preselectionlot6", "#ff6600"],
   ["Preselectionlot7", "#ff6600"],
+  [null,"#17a2b8"]
 ];
 
 // Function to assign opacity to lines according to zoom
