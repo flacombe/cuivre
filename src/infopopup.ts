@@ -77,6 +77,14 @@ class InfoPopup {
     })
   }
 
+  friendlyRender(label: string){
+    if (label in friendlyNames) {
+      return friendlyNames[label]
+    } else {
+      return label;
+    }
+  }
+
   renderKey(key: string, value: any) {
     if (hidden_keys.includes(key) || key.startsWith('name_') || !value) {
       return null
@@ -89,7 +97,7 @@ class InfoPopup {
       })
       key = 'Website'
     } else {
-      key = titleCase(key)
+      key = titleCase(this.friendlyRender(key))
     }
 
     return el('tr', el('th', key), el('td', value))
@@ -106,12 +114,7 @@ class InfoPopup {
     }
 
     if (!title_text) {
-      const layer_id = feature.layer['id']
-      if (layer_id in friendlyNames) {
-        title_text = friendlyNames[layer_id]
-      } else {
-        title_text = feature.layer['id']
-      }
+      title_text = this.friendlyRender(feature.layer['id']);
     }
 
     const container = el('div.nameContainer', el('h3', title_text))

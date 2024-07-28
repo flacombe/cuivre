@@ -91,7 +91,7 @@ function init() {
   map.addControl(layer_switcher, 'top-right')
   new InfoPopup(
     cu_layers.map((layer: { [x: string]: any }) => layer['id']),
-    9
+    6
   ).add(map);
 }
 
