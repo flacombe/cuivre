@@ -13,13 +13,13 @@ const hidden_keys = [
   'name',
   'wikidata',
   'wikipedia',
-  'construction',
-  'tunnel',
   'is_node',
   'area',
   'gid',
-  'ref_len',
-  'frequency'
+  'Com_id',
+  'com_nom',
+  'cuivre_id',
+  'fibre_id'
 ]
 
 class InfoPopup {
@@ -78,25 +78,8 @@ class InfoPopup {
   }
 
   renderKey(key: string, value: any) {
-    if (hidden_keys.includes(key) || key.startsWith('name_') || key.startsWith('voltage') || !value) {
+    if (hidden_keys.includes(key) || key.startsWith('name_') || !value) {
       return null
-    }
-
-    if (key.startsWith('voltage')) {
-      value = `${Number(parseFloat(value).toFixed(2))} kV`
-    }
-
-    if (key == 'output') {
-      const val = parseFloat(value)
-      if (val < 1) {
-        value = `${(val * 1000).toFixed(2)} kW`
-      } else {
-        value = `${val.toFixed(2)} MW`
-      }
-    }
-
-    if (key == 'frequency' && value == '0') {
-      value = 'DC'
     }
 
     if (key == 'url') {
