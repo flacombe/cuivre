@@ -99,6 +99,8 @@ where g.cuivre_addrrank=a.cuivre_addrrank;
 
 ## Imports / Exports
 
+Il peut être utile de transformer les géométries vers le webmercator pour du rendu web, en ajoutant `St_Transform(geom,'EPSG:4326', 'EPSG:3857')` sur les géométries concernées dans les requêtes d'export ci-dessous.
+
 ### Adresses cuivre
 
 Import:
@@ -127,10 +129,10 @@ psql -c "COPY(select ST_AsText(fibre_point) as fibre_point, fibre_imb, fibre_num
 
 Import :
 ```bash
-psql -c "COPY cuivre_fibrepaths (cuivre_id, fibre_id, fibre_imb, path) from stdin with csv header;" < /tmp/cuivre_fibrepaths.csv
+psql -c "COPY cuivre_fibrepaths (cuivre_addrrank, fibre_id, fibre_imb, path) from stdin with csv header;" < /tmp/cuivre_fibrepaths.csv
 ```
 
 Export :
 ```bash
-psql -c "COPY(select cuivre_id, fibre_id, fibre_imb, ST_AsText(path) as path from cuivre_fibrepaths) TO STDOUT WITH CSV HEADER;" > /tmp/cuivre_fibrepaths.csv
+psql -c "COPY(select cuivre_addrrank, fibre_id, fibre_imb, ST_AsText(path) as path from cuivre_fibrepaths) TO STDOUT WITH CSV HEADER;" > /tmp/cuivre_fibrepaths.csv
 ```

@@ -16,7 +16,7 @@ CREATE INDEX ON cuivre_adresses using btree(cuivre_dept);
 TRUNCATE TABLE cuivre_fibrepaths;
 
 INSERT INTO cuivre_fibrepaths
-SELECT ca.cuivre_id, fi.fibre_id, ca.fibre_imb, ST_MakeLine(ca.cuivre_point, fi.fibre_point) as path
+SELECT ca.cuivre_addrrank, fi.fibre_id, ca.fibre_imb, ST_MakeLine(ca.cuivre_point, fi.fibre_point) as path
 FROM cuivre_adresses ca
 JOIN cuivre_ftthipe fi
     ON fi.fibre_imb=ca.fibre_imb

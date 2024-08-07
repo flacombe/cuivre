@@ -19,7 +19,8 @@ const hidden_keys = [
   'com_id',
   'com_nom',
   'cuivre_id',
-  'fibre_id'
+  'fibre_id',
+  'path_id'
 ]
 
 class InfoPopup {

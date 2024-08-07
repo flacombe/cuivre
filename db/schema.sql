@@ -58,7 +58,8 @@ CREATE TABLE cuivre_ftthipe (
 
 -- Table cuivre_fibrepaths
 CREATE TABLE cuivre_fibrepaths (
-    cuivre_id integer,
+    path_id serial primary key,
+    cuivre_addrrank integer,
     fibre_id integer,
     fibre_imb varchar,
     path geometry
