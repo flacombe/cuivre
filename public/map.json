@@ -6,7 +6,7 @@
   "center": [0, 0, 0],
   "format": "pbf",
   "minzoom": 2,
-  "maxzoom": 14,
+  "maxzoom": 15,
   "tiles": ["https://cuivre.infos-reseaux.com/tiles/{z}/{x}/{y}.pbf"],
   "vector_layers": [
     {"id": "communes", "description": "Communes et leur état de fermeture cuivre", "fields": {}},

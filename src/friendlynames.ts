@@ -2,8 +2,10 @@
 const friendlyNames: { [key: string]: string } = {
     cuivre_adresses: 'Adresse cuivre',
     fibre_adresses: 'Adresse fibre',
+    cuivre_adresse: 'Adresse',
     cuivre_fibre_path: 'Relation cuivre/fibre',
-    fibre_imb: 'Adresse fibre',
+    fibre_adresse: 'Adresse',
+    fibre_imb: 'Immeuble',
     fibre_imb_cat: 'Catégorie',
     fibre_imb_etat: 'Déploiement',
     fibre_imb_type: 'Nature',
