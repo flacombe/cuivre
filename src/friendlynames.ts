@@ -13,6 +13,7 @@ const friendlyNames: { [key: string]: string } = {
     fibre_imb_type: 'Nature',
     fibre_pm: 'Point de mutualisation',
     fibre_pm_etat: 'Déploiement PM',
+    fibre_absente: 'Aucune correspondance fibre',
     com_fc_annonce: 'Ferm. commerciale (annonce)',
     com_fc_ferme: 'Ferm. commerciale (ferme)',
     com_ft_annonce: 'Ferm. technique (annonce)',

@@ -40,6 +40,8 @@ On prendra soin de supprimer les colonnes suivantes pour produire un fichier csv
 * int_occ_cuivre
 * tx_occ_cuivre
 
+Il faut également modifier le format de dates des colonnes qui en contiennent pour passer du format français (JJ/MM/AAAA) au format [RFC9333](https://www.rfc-editor.org/rfc/rfc3339) (AAAA-MM-JJ).
+
 ```bash
 psql -c "COPY cuivre_communes(com_insee, com_subdiv, com_nom, com_dept, com_epci, com_ftth, com_lot, com_fc_annonce, com_ft_annonce, com_adaptsav_annonce, com_fc_report, com_fc_initiale, com_ft_initiale, com_fc_ferme, com_ft_ferme, com_adaptsav_ferme, com_ftth_taux, com_loc_ref, com_imb_ref, com_loc_total, com_loc_deployes, com_loc_construction, com_loc_nonrac, com_imb_nonrac, com_loc_construction_nonrac, com_loc_rad, com_loc_rad_tarifspe, com_loc_refustiers, com_loc_blocage, com_oi) from stdin with csv header;" < ./communes_cuivre.csv
 ```

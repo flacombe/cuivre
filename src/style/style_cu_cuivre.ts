@@ -24,7 +24,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     type: 'line',
     source: 'cuivre',
     'source-layer': 'cuivre_fibre_liens',
-    minzoom: 0,
+    minzoom: 10,
     paint: {
       'line-color': "#666666",
       'line-width': 1,

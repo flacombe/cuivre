@@ -10,7 +10,7 @@ window w as (order by cuivre_num, cuivre_voie, cuivre_insee);
 update cuivre_fibre m
     set cuivre_addrrank = new_addrrank
 from cuivre_rank s
-where m.cuivre_id = s.cuivre_id and m.cuivre_dept='74';
+where m.cuivre_id = s.cuivre_id;
 
 -- Indexation
 CREATE INDEX ON cuivre_adresses using btree(cuivre_addrrank);

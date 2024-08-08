@@ -3,7 +3,7 @@ import { ExpressionSpecification } from 'maplibre-gl'
 import {scale_color, lotColor_scale} from './common.js';
 
 
-const communeOpacity_p: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], 8, 0.6, 14, 0.15]
+const communeOpacity_p: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], 8, 0.6, 15, 0.15, 22, 0.05]
 
 const layers: LayerSpecificationWithZIndex[] = [
   {
