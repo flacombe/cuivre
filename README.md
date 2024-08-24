@@ -3,7 +3,8 @@ Il s'agit d'un socle logiciel pour visualiser les données à l'adresse, de tran
 
 Il tire aventageusement parti de Node.js, Maplibre GL, Vite et Docker.
 
-Les données géographiques visualisées peuvent être obtenues via un serveur de tuiles vectorielles conformes à la référence ci-dessous et par exemple déployé dans le cadre du [projet OpenInfraMap](https://github.com/flacombe/openinframap).
+Les données géographiques visualisées peuvent être obtenues via un serveur de tuiles vectorielles conformes à la référence ci-dessous et par exemple déployé dans le cadre du [projet OpenInfraMap](https://github.com/flacombe/openinframap).  
+Ce projet ne l'intègre pas directement, il faudra vous reporter à [la configuration](https://github.com/flacombe/openinframap/tree/latest/tegola) de celui utilisé en production.
 
 # Contexte
 

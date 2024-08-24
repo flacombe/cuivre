@@ -29,28 +29,29 @@
     <div class="row">
       <div class="col-lg-6">
 
-      <p class="lead"><a href="/">Cette application</a> propose une vue cartographique du programme de fermeture du
-        réseau cuivre et de la complétude FTTH associée dans chaque commune.</p>
-      <p>Il était jusqu'à récemment difficile de se rendre compte des disparités entre la desserte du réseau cuivre
-        et de celle de la fibre alors que le second est appelé à remplacer le premier dans le plus de locaux possibles.</p>
-
-      <h2>Le programme de fermeture du réseau cuivre</h2>
-      <p>Orange, en charge de l'exploitation du réseau cuivre a présenté <a href="https://www.arcep.fr/nos-sujets/la-fermeture-du-reseau-cuivre.html" target="_blank">un plan de fermeture</a> de ce réseau
-        devant à terme être remplacé par la nouvelle infrastructure en fibre optique.</p>
-      <p>Différentes pages en expliquent les tenants et aboutissants, parmi lesquelles :
-        <ul>
-          <li><a href="https://reseaux.orange.fr/nos-reseaux/modernisation-des-reseaux/evolution-de-la-telephonie-fixe-et-internet" target="_blank">La modernisation des réseaux</a> par Orange</li>
-          <li><a href="https://www.economie.gouv.fr/treshautdebit" target="_blank">Le site gouvernenemental</a></li>
-          <li><a href="https://www.arcep.fr/nos-sujets/la-fermeture-du-reseau-cuivre.html" target="_blank">Le site de l'ARCEP</a></li>
-        </ul>
-      </p>
-      <p>Le programme se déroule selon un calendrier progressif sur 10 ans, partant d'expérimentations
-        sur des périmètres réduits jusqu'à des phases industrielles de plusieurs milions de locaux.
-      <br/>Il est donc particulièrement utile de disposer d'outils efficaces pour en comprendre
-        le déroulement et s'adapter à ce que cela implique. Cette application prétend répondre à une partie de ces besoins.</p>
-      
-      <h2>Quelles données sont utilisées ?</h2>
+        <p class="lead"><a href="/">Cette application</a> propose une vue cartographique du programme de fermeture du
+          réseau cuivre et de la complétude FTTH associée dans chaque commune.</p>
         
+        <p>Il était jusqu'à récemment difficile de se rendre compte des disparités entre la desserte du réseau cuivre
+          et de celle de la fibre alors que le second est appelé à remplacer le premier dans le plus de locaux possibles.</p>
+
+        <h2>Le programme de fermeture du réseau cuivre</h2>
+        <p>Orange, en charge de l'exploitation du réseau cuivre a présenté <a href="https://www.arcep.fr/nos-sujets/la-fermeture-du-reseau-cuivre.html" target="_blank">un plan de fermeture</a> de ce réseau
+          devant à terme être remplacé par la nouvelle infrastructure en fibre optique.</p>
+        <p>Différentes pages en expliquent les tenants et aboutissants, parmi lesquelles :
+          <ul>
+            <li><a href="https://reseaux.orange.fr/nos-reseaux/modernisation-des-reseaux/evolution-de-la-telephonie-fixe-et-internet" target="_blank">La modernisation des réseaux</a> par Orange</li>
+            <li><a href="https://www.economie.gouv.fr/treshautdebit" target="_blank">Le site gouvernenemental</a></li>
+            <li><a href="https://www.arcep.fr/nos-sujets/la-fermeture-du-reseau-cuivre.html" target="_blank">Le site de l'ARCEP</a></li>
+          </ul>
+        </p>
+        <p>Le programme se déroule selon un calendrier progressif sur 10 ans, partant d'expérimentations
+          sur des périmètres réduits jusqu'à des phases industrielles de plusieurs milions de locaux.
+        <br/>Il est donc particulièrement utile de disposer d'outils efficaces pour en comprendre
+          le déroulement et s'adapter à ce que cela implique. Cette application prétend répondre à une partie de ces besoins.</p>
+        
+        <h2>Quelles données sont utilisées ?</h2>
+          
         <h3>Périmètres administratifs</h3>
         <p>Les périmètres communaux connus d'OpenStreetMap sont utilisés pour tracer le périmètre et calculer les centroïdes des communes.</p>
 
@@ -69,46 +70,49 @@
           <br/>Elles sont disponibles sur <a href="https://www.data.gouv.fr/fr/datasets/le-marche-du-haut-et-tres-haut-debit-fixe-deploiements/" target="_blank">le site gouvernemental data.gouv.fr</a>.
         </p>
 
-      <a id="errors"></a>
-      <h2>Je constate une erreur, que faire ?</h2>
+        <a id="errors"></a>
+        <h2>Je constate une erreur, que faire ?</h2>
         <p>Tout dépend de la nature de l'erreur découverte. D'après les sources de données ci-dessus, il faudra s'adresser à l'acteur concerné.
           <br/>En tout état de cause et vu la charge de travail que cela représente, il faudra patienter pour la voir corriger sur cette application, puisqu'il sera nécessaire de mettre à jour l'ensemble des référentiels et surtout refaire le géocodage des adresses sur les départements concernés.
         </p>
 
         <h3>Une adresse cuivre est mal formée ou absente</h3>
-          <p>C'est du ressort d'Orange, contactez votre interlocuteur habituel</p>
+        <p>C'est du ressort d'Orange, contactez votre interlocuteur habituel</p>
         
         <h3>Une adresse cuivre est mal positionnée</h3>
-          <p>Observez sa composition, est-elle correcte ? Si oui, vérifiez sa position sur la carte en ligne et contactez votre mairie pour la faire mettre à jour.
-            <br/>Si non, reportez-vous au cas précédent ci-dessus.
-          </p>
+        <p>Observez sa composition, est-elle correcte ? Si oui, vérifiez sa position sur <a href="https://adresse.data.gouv.fr/base-adresse-nationale" target="_blank">la carte en ligne de la BAN</a> et contactez votre mairie pour la faire mettre à jour.
+          <br/>Si non, reportez-vous au cas précédent ci-dessus.
+        </p>
 
         <h3>Une association cuivre/fibre est inappropriée</h3>
-          <p>Dans le cas des association de niveau 2, en gris clair sur la carte, les adresses cuivre sont rapprochées du réseau sans qu'il y ait correspondance entre les adresses, ces associations sont approximatives la plupart du temps et c'est normal.
-            <br/>Dans le cas d'une association de niveau 1, en gris foncé, les adresses sont réputées équivalentes et cette association est du ressort d'Orange. Il faudra donc contacter votre interlocuteur habituel.
-          </p>
+        <p>Dans le cas des associations de niveau 2, en gris clair sur la carte, les adresses cuivre sont rapprochées du réseau sans qu'il y ait correspondance entre les adresses, ces associations sont approximatives la plupart du temps et c'est normal.
+          <br/>Dans le cas d'une association de niveau 1, en gris foncé, les adresses sont réputées équivalentes et cette association est du ressort d'Orange. Il faudra donc contacter votre interlocuteur habituel.
+        </p>
         
         <h3>Une adresse fibre est erronnée, absente ou mal positionnée</h3>
-          <p>C'est du ressort de l'opérateur d'infrastructure fibre de la zone. Contactez-le directement pour faire corriger l'anomalie.</p>
+          <p>C'est du ressort de l'opérateur d'infrastructure fibre de la zone. Contactez-le directement pour faire corriger l'anomalie dans la prochaine publication trimestrielle des données ARCEP.
+            <br/>Vous constaterez la correction de l'adresse sur <a href="https://cartefibre.arcep.fr/" target="_blank">CarteFibre</a> avant de la voir propagée ici.
+          </p>
 
-      <h2>Quelles technologies sont utilisées ?</h2>
-      <p>Les outils suivants sont mis en oeuvre pour permettre à cette carte d'exister :</p>
-      <ul>
-        <li><a href="https://www.postgresql.org/">PostgreSQL</a>/<a href="http://postgis.net/">PostGIS</a> pour le stockage
-        <li><a href="https://imposm.org/">Imposm3</a> pour filtrer et importer les données OpenStreetMap
-        <li><a href="http://tegola.io/">Tegola</a> pour générer et servir des tuiles vectorielles
-	      <li><a href="https://maplibre.org/maplibre-gl-js/docs/">Maplibre GL JS</a> pour l'interface web</li>
-      </ul>
-      
-      <p>Le fond de carte est gracieusement fourni par <a href="https://www.maptiler.com/"><img width="150px" src="img/maptiler.png"></a>.</p>
+        <h2>Quelles technologies sont utilisées ?</h2>
+        <p>Les outils suivants sont mis en oeuvre pour permettre à cette carte d'exister :</p>
+        <ul>
+          <li><a href="https://www.postgresql.org/">PostgreSQL</a>/<a href="http://postgis.net/">PostGIS</a> pour le stockage
+          <li><a href="https://imposm.org/">Imposm3</a> pour filtrer et importer les données OpenStreetMap
+          <li><a href="http://tegola.io/">Tegola</a> pour générer et servir des tuiles vectorielles
+          <li><a href="https://maplibre.org/maplibre-gl-js/docs/">Maplibre GL JS</a> pour l'interface web</li>
+        </ul>
+        
+        <p>Le fond de carte est gracieusement fourni par <a href="https://www.maptiler.com/"><img width="150px" src="img/maptiler.png"></a>.</p>
 
-      <h2>Où se trouve le code ?</h2>
-      <p>Le dépot officiel du projet est situé sur <a href="https://github.com/flacombe/cuivre">GitHub</a>. Des mises à jour sont régulièrement apportées.</p>
-      <p>Il s'agit d'un fork d'<a href="https://www.openinframap.org">OpenInfraMap</a> dont le code est également disponible sur <a href="https://github.com/openinframap">GitHub</a>.
-      
-      <h2>Qui a fait ça ?</h2>
-      <p><a href="https://russ.garrett.co.uk">Russ</a> et <a href="https://github.com/flacombe">François</a>, passionés par les infrastructures.</p>
-      <p>L'hébergement est actuellement assuré par <a href="https://www.openstreetmap.fr/">l'association OpenStreetMap France</a></p>
+        <h2>Où se trouve le code ?</h2>
+        <p>Le dépot officiel du projet est situé sur <a href="https://github.com/flacombe/cuivre">GitHub</a>. Des mises à jour sont régulièrement apportées.</p>
+        <p>Il s'agit d'un fork d'<a href="https://www.openinframap.org">OpenInfraMap</a> dont le code est également disponible sur <a href="https://github.com/openinframap">GitHub</a>.
+        
+        <h2>Qui a fait ça ?</h2>
+        <p><a href="https://russ.garrett.co.uk">Russ</a> et <a href="https://github.com/flacombe">François</a>, passionés par les infrastructures.
+        <br/>Il s'agit d'une contribution bénévole non financée.</p>
+        <p>L'hébergement est actuellement assuré par <a href="https://www.openstreetmap.fr/" target="_blank">l'association OpenStreetMap France</a>, les moyens techniques de <a href="https://www.telehouse.fr/" target="_blank">Téléhouse France</a> et la connectivité <a href="https://www.hivane.net/" target="_blank">d'Hivane</a>.</p>
 
       </div>
       <div class="col-lg-4">
