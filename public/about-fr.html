@@ -57,6 +57,7 @@
         <h3>Données du réseau cuivre</h3>
         <p>L'article 28 de <a href="https://www.arcep.fr/uploads/tx_gsavis/23-2802.pdf" target="_blank">la décision ARCEP 2023-2802</a> encadre la publication des données utilisées par cette application.
           <br/>Leur format est précisé dans l'annexe 2b §2.1.2a de la même décision.
+          <br/>Cette publication ne prévoit pas la géolocalisation des adresses. Les positions ne sont donc pas données par Orange mais obtenues à partir de <a href="https://adresse.data.gouv.fr/" target="_blank">la BAN</a>, dont la complétude et l'exactitude sont in fine de la responsabilité des mairies.
         </p>
         <p>Les données relatives au programme de fermeture et les adresses desservies par le réseau
           cuivre sont ainsi publiées par Orange France sur son <a href="https://gallery.orange.com/reseaux/?v=11c9b041-420b-47f3-8a91-8a9adbe2a86a" target="_blank">site internet institutionnel</a>
@@ -67,7 +68,29 @@
           dans le cadre de ses études de marché du Très Haut Débit et de sa collecte de données auprès des opérateurs.
           <br/>Elles sont disponibles sur <a href="https://www.data.gouv.fr/fr/datasets/le-marche-du-haut-et-tres-haut-debit-fixe-deploiements/" target="_blank">le site gouvernemental data.gouv.fr</a>.
         </p>
+
+      <a id="errors"></a>
+      <h2>Je constate une erreur, que faire ?</h2>
+        <p>Tout dépend de la nature de l'erreur découverte. D'après les sources de données ci-dessus, il faudra s'adresser à l'acteur concerné.
+          <br/>En tout état de cause et vu la charge de travail que cela représente, il faudra patienter pour la voir corriger sur cette application, puisqu'il sera nécessaire de mettre à jour l'ensemble des référentiels et surtout refaire le géocodage des adresses sur les départements concernés.
+        </p>
+
+        <h3>Une adresse cuivre est mal formée ou absente</h3>
+          <p>C'est du ressort d'Orange, contactez votre interlocuteur habituel</p>
         
+        <h3>Une adresse cuivre est mal positionnée</h3>
+          <p>Observez sa composition, est-elle correcte ? Si oui, vérifiez sa position sur la carte en ligne et contactez votre mairie pour la faire mettre à jour.
+            <br/>Si non, reportez-vous au cas précédent ci-dessus.
+          </p>
+
+        <h3>Une association cuivre/fibre est inappropriée</h3>
+          <p>Dans le cas des association de niveau 2, en gris clair sur la carte, les adresses cuivre sont rapprochées du réseau sans qu'il y ait correspondance entre les adresses, ces associations sont approximatives la plupart du temps et c'est normal.
+            <br/>Dans le cas d'une association de niveau 1, en gris foncé, les adresses sont réputées équivalentes et cette association est du ressort d'Orange. Il faudra donc contacter votre interlocuteur habituel.
+          </p>
+        
+        <h3>Une adresse fibre est erronnée, absente ou mal positionnée</h3>
+          <p>C'est du ressort de l'opérateur d'infrastructure fibre de la zone. Contactez-le directement pour faire corriger l'anomalie.</p>
+
       <h2>Quelles technologies sont utilisées ?</h2>
       <p>Les outils suivants sont mis en oeuvre pour permettre à cette carte d'exister :</p>
       <ul>

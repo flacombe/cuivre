@@ -8,12 +8,13 @@ Les données géographiques visualisées peuvent être obtenues via un serveur d
 # Contexte
 
 En France, le déploiement de la fibre optique à domicile est avancé et permet désormais l'abandon de l'infrastructure téléphonique historique sur paire de cuivre.  
-Orange, l'opérateur en charge de son exploitatio a présenté un plan de fermeture devant s'échelonner sur 10 ans, jusqu'en 2030.
+Orange, l'opérateur en charge de son exploitation a présenté un plan de fermeture devant s'échelonner sur 10 ans, jusqu'en 2030.
 
 En attendant les différents jalons de fermeture, il est essentiel de disposer des données exposant les locaux concernés et les échéances en jeu.  
 Se préparer est essentiel pour éviter de se trouver face à un mur lorsque l'infrastructure devra être arrêtée.
 
-Ce logiciel vise donc à simplifier la présentation de ces informations pour tout un chacun.
+Ce logiciel vise donc à simplifier la présentation de ces informations pour tout un chacun.  
+Plus d'informations sont données sur [la page A propos](https://cuivre.infos-reseaux.com/about-fr.html) disponible en ligne.
 
 # Installation
 
