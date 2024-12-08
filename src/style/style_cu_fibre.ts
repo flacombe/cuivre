@@ -4,7 +4,7 @@ import {dotRadius_p, dotStroke_p} from './common.js';
 const colour_fibre_deploye = '#1c9100';
 const colour_fibre_prevu = '#2f492a';
 const colour_fibre_demande = '#1e74fd';
-const colour_fibre_abandonne = '#61716b';
+const colour_fibre_abandonne = '#777777';
 const colour_fibre_nocopper = '#7dff7d';
 
 const layers: LayerSpecificationWithZIndex[] = [
