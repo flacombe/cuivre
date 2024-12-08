@@ -1,12 +1,12 @@
 import { IControl } from 'maplibre-gl'
 import {el, mount, list, setStyle, RedomElement} from 'redom';
-import {svgLine, svgRect, svgCircleFromLayer} from './svg.js';
+import {svgLine, svgRect, svgCircle, svgCircleFromLayer} from './svg.js';
 import './key.css';
 // @ts-expect-error Vite virtual module
 import { manifest } from 'virtual:render-svg'
 import {lotColor_scale} from '../style/common.js';
 import {cuivreLayers} from '../style/style_cu_cuivre.js';
-import {fibreLayers} from '../style/style_cu_fibre.js';
+import {colour_fibre_deploye, colour_fibre_prevu, colour_fibre_demande, colour_fibre_abandonne} from '../style/style_cu_fibre.js';
 
 class Td {
   el: HTMLTableCellElement
@@ -150,7 +150,10 @@ class KeyControl implements IControl {
 
   fibreTable() {
     const rows = [
-      ['Adresse', svgCircleFromLayer(fibreLayers, 'fibre_adresses')]
+      ['Immeuble déployé', svgCircle(colour_fibre_deploye, '#9C9C9C', 1, 7)],
+      ['Immeuble prévu', svgCircle(colour_fibre_prevu, '#9C9C9C', 1, 7)],
+      ['Immeuble à la demande', svgCircle(colour_fibre_demande, '#9C9C9C', 1, 7)],
+      ['Immeuble abandonné', svgCircle(colour_fibre_abandonne, '#9C9C9C', 1, 7)]
     ]
     
     const table = list('table', Tr)

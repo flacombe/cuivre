@@ -44,7 +44,7 @@ const dotRadius_p: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'
 const dotStroke_p:ExpressionSpecification = ['interpolate', ['linear'], ['zoom'],
   10, 0.1,
   14, 0.5,
-  17, 1
+  17, 1.2
 ]
 
 const lotColor_scale = [
@@ -54,22 +54,19 @@ const lotColor_scale = [
   ["1", "#ffd7bd"],
   ["2", "#ffc39c"],
   ["3", "#ffaf7b"],
-  ["4", "#ff9754"],
-  ["5", "#ff802e"],
-  ["6", "#ff761e"],
-  ["7", "#ff5500"],
-  ["Preselectionlot1", "#d40000"],
-  ["Preselectionlot2", "#d40000"],
-  ["Preselectionlot3", "#d40000"],
+  // ["4", "#ff9754"],
+  // ["5", "#ff802e"],
+  // ["6", "#ff761e"],
+  // ["7", "#ff5500"],
+  // ["Preselectionlot1", "#d40000"],
+  // ["Preselectionlot2", "#d40000"],
+  // ["Preselectionlot3", "#d40000"],
   ["Preselectionlot4", "#d40000"],
-  ["Preselectionlot5", "#d40000"],
-  ["Preselectionlot6", "#d40000"],
-  ["Preselectionlot7", "#d40000"],
+  // ["Preselectionlot5", "#d40000"],
+  // ["Preselectionlot6", "#d40000"],
+  // ["Preselectionlot7", "#d40000"],
   [null,"#303030"]
 ];
-
-// Function to assign opacity to lines according to zoom
-
 
 const font = ['Noto Sans Regular']
 
