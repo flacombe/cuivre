@@ -150,10 +150,10 @@ class KeyControl implements IControl {
 
   fibreTable() {
     const rows = [
-      ['Immeuble déployé', svgCircle(colour_fibre_deploye, '#9C9C9C')],
-      ['Immeuble prévu', svgCircle(colour_fibre_prevu, '#9C9C9C')],
-      ['Immeuble à la demande', svgCircle(colour_fibre_demande, '#9C9C9C')],
-      ['Immeuble abandonné', svgCircle(colour_fibre_abandonne, '#9C9C9C')]
+      ['Immeuble déployé', svgCircle(colour_fibre_deploye, '#9C9C9C', 1, 7)],
+      ['Immeuble prévu', svgCircle(colour_fibre_prevu, '#9C9C9C', 1, 7)],
+      ['Immeuble à la demande', svgCircle(colour_fibre_demande, '#9C9C9C', 1, 7)],
+      ['Immeuble abandonné', svgCircle(colour_fibre_abandonne, '#9C9C9C', 1, 7)]
     ]
     
     const table = list('table', Tr)
