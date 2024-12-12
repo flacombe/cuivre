@@ -27,9 +27,9 @@ const layers: LayerSpecificationWithZIndex[] = [
           "abandonne", colour_fibre_abandonne,
           colour_fibre_prevu
       ],
-      'circle-stroke-color': ["match",
-        ["get", "fibre_fc_cuivre"],
-          "1", colour_fibre_nocopper,
+      'circle-stroke-color': ["case",
+        ["boolean", ["get", "fibre_cuivre_fcr_on"], true],
+          colour_fibre_nocopper,
           "#9C9C9C"
       ],
       'circle-stroke-width': dotStroke_p
@@ -38,4 +38,4 @@ const layers: LayerSpecificationWithZIndex[] = [
 
 ];
 
-export {layers as fibreLayers, colour_fibre_deploye, colour_fibre_prevu, colour_fibre_demande, colour_fibre_abandonne};
+export {layers as fibreLayers, colour_fibre_deploye, colour_fibre_prevu, colour_fibre_demande, colour_fibre_abandonne, colour_fibre_nocopper};

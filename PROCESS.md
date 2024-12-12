@@ -68,13 +68,30 @@ Le fichier des adresses du cuivre est également disponible sur [le site institu
 psql -c "COPY cuivre_adresses(cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, cuivre_voie, cuivre_num, cuivre_hexavia, cuivre_voie_hexacle, cuivre_num_hexacle, cuivre_catreco, cuivre_fibre_distance, fibre_l33, fibre_imb, meta_traitement) FROM stdin DELIMITER ';' CSV HEADER;" < ./cuivre_fibre.csv
 ```
 
-### Adresses fibre
+### IPE fibre
 
-Les adresses fibres sont extraites de la collecte des fichiers IPE par l'ARCEP, publiés et mis à jour tous les trimestres [sur data.gouv](https://www.data.gouv.fr/fr/datasets/le-marche-du-haut-et-tres-haut-debit-fixe-deploiements/).
-
+L'IPE fibre correspond à la collecte des fichiers IPE par l'ARCEP, publiés et mis à jour tous les trimestres [sur data.gouv](https://www.data.gouv.fr/fr/datasets/le-marche-du-haut-et-tres-haut-debit-fixe-deploiements/).
 
 ```bash
 psql -c "COPY cuivre_ftthipe(fibre_lng, fibre_lat, fibre_imb, fibre_num, fibre_num_cp, fibre_voie_type, fibre_voie, fibre_bat, fibre_insee, fibre_postal, fibre_commune, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_geom_mod, fibre_imb_type, fibre_date_completude, fibre_date_completude_manquante) from stdin DELIMITER ',' CSV HEADER;" < ./carte_fibre_immeubles_2024_1_20240613.csv
+```
+
+### La base immeuble fibre
+
+La base immeuble fibre est constituée par l'ARCEP et mise à jour tous les trimestres [sur data.arcep.fr](https://data.arcep.fr/fixe/maconnexioninternet/base_imb/index.html).  
+Elle permet de faire le lien entre l'identifiant immeuble de l'IPE et une clé interne unique nationalement (à remplacer par l'identifiant RNB)
+
+```bash
+psql -c "COPY cuivre_ftthimb(fibre_id, fibre_x, fibre_y, fibre_imb, fibre_insee, fibre_nbloc, fibre_source, fibre_imb_type, fibre_ban, fibre_imb_num, fibre_addr_num, fibre_addr_num_cp, fibre_addr_voie, fibre_addr_ld, fibre_addr_insee, fibre_commune, fibre_addr_fantoir, fibre_addr_source) from stdin DELIMITER ';' CSV HEADER;" < ./fibre_imb.csv
+```
+
+### Le suivi de la fermeture du cuivre
+
+Les indicateurs de suivi de la fermeture du cuivre permettent de connaître la progression de la fermeture commerciale rapide, à l'adresse.
+Le fichier est constitué par l'ARCEP et mis à jour tous les trimestres [sur data.arcep.fr](https://data.arcep.fr/fixe/maconnexioninternet/fermeture_cuivre/index.html).
+
+```bash
+psql -c "COPY cuivre_ftthfc(fibre_id, cuivre_lot, cuivre_ft_on, cuivre_fc_on, cuivre_fcr_on, fibre_raccordable, cuivre_ft_annee) from stdin DELIMITER ';' CSV HEADER;" < ./fibre_fc.csv
 ```
 
 ## Pré-process
@@ -84,6 +101,14 @@ On execute le script prévu :
 
 ```bash
 psql -f db/preprocess.sql
+```
+
+## Traitement des données fibre
+
+Il est nécessaire de produire une table enrichie des données fibre, croisement de l'IPE avec les drapeaux de fermeture du cuivre
+
+```bash
+psql -f db/fibredata.sql
 ```
 
 ## Ranking des adresses cuivre
@@ -136,7 +161,7 @@ Cela se passe avec le script :
 psql -f db/fibrepaths.sql
 ```
 
-Après cette étape, l'ensemble des données sont prêtes au rendu cartographique.
+Après cette étape, l'ensemble des données sont prêtes au rendu cartographique (non décrit ici).
 
 ## Imports / Exports
 
@@ -154,17 +179,21 @@ Export :
 psql -c "COPY(select distinct on (cuivre_addrrank) cuivre_addrrank, cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, cuivre_voie, cuivre_num, ST_AsText(cuivre_point) as cuivre_point, cuivre_catreco, cuivre_fibre_distance, fibre_imb, fibre_l33, fibre_absente from cuivre_adresses) TO STDOUT WITH CSV HEADER;" > /tmp/cuivre_adresses.csv
 ```
 
-### IPE FTTH
+Lors d'un import on prendra soin de reconstruire les indexes prévus dans le fichier `db/preprocess.sql`
+
+### Immeubles FTTH
 
 Import :
 ```bash
-psql -c "COPY cuivre_ftthipe (fibre_imb, fibre_point, fibre_num, fibre_voie_type, fibre_voie, fibre_bat, fibre_insee, fibre_commune, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_imb_type, fibre_date_completude, fibre_date_completude_manquante) from stdin WITH CSV HEADER;" < /tmp/cuivre_ftthipe.csv
+psql -c "COPY cuivre_fibre (fibre_id, fibre_imb, fibre_addr_num, fibre_addr_voie_type, fibre_addr_voie, fibre_addr_bat, fibre_insee, fibre_commune, fibre_dept, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_imb_type, fibre_point, fibre_cuivre_ft_on, fibre_cuivre_fcr_on) from stdin WITH CSV HEADER;" < /tmp/cuivre_fibre.csv
 ```
 
 Export :
 ```bash
-psql -c "COPY(select distinct on (fibre_imb) fibre_imb, ST_AsText(fibre_point) as fibre_point, fibre_num, fibre_voie_type, fibre_voie, fibre_bat, fibre_insee, fibre_commune, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_imb_type, fibre_date_completude, fibre_date_completude_manquante from cuivre_ftthipe) TO STDOUT WITH CSV HEADER;" > /tmp/cuivre_ftthipe.csv
+psql -c "COPY(select fibre_id, fibre_imb, fibre_addr_num, fibre_addr_voie_type, fibre_addr_voie, fibre_addr_bat, fibre_insee, fibre_commune, fibre_dept, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_imb_type, ST_AsText(St_Transform(fibre_point,'EPSG:4326', 'EPSG:3857')) as fibre_point, fibre_cuivre_ft_on, fibre_cuivre_fcr_on from cuivre_fibre) TO STDOUT WITH CSV HEADER;" > /tmp/cuivre_fibre.csv
 ```
+
+Lors d'un import on prendra soin de reconstruire les indexes prévus dans le fichier `db/fibredata.sql`
 
 ### Liens cuivre / fibre
 

@@ -31,17 +31,15 @@ CREATE TABLE cuivre_geocoded (
 
 -- Table cuivre_ftthipe
 CREATE TABLE cuivre_ftthipe (
-    fibre_id serial primary key,
     fibre_imb varchar,
-    fibre_num varchar,
-    fibre_num_cp varchar,
-    fibre_voie_type varchar,
-    fibre_voie varchar,
-    fibre_bat varchar,
+    fibre_addr_num varchar,
+    fibre_addr_num_cp varchar,
+    fibre_addr_voie_type varchar,
+    fibre_addr_voie varchar,
+    fibre_addr_bat varchar,
     fibre_insee varchar,
-    fibre_postal varchar,
+    fibre_addr_postal varchar,
     fibre_commune varchar,
-    fibre_dept varchar,
     fibre_imb_cat varchar,
     fibre_imb_etat varchar,
     fibre_pm varchar,
@@ -51,9 +49,42 @@ CREATE TABLE cuivre_ftthipe (
     fibre_imb_type varchar,
     fibre_date_completude date,
     fibre_date_completude_manquante varchar,
-    fibre_point geometry,
     fibre_lng numeric,
     fibre_lat numeric
+);
+
+-- Table cuivre_ftthimb
+CREATE TABLE cuivre_ftthimb (
+    fibre_id integer primary key,
+    fibre_imb varchar,
+    fibre_x numeric,
+    fibre_y numeric,
+    fibre_insee varchar,
+    fibre_nbloc integer,
+    fibre_source varchar,
+    fibre_imb_type varchar,
+    fibre_ban varchar,
+    fibre_imb_num varchar,
+    fibre_addr_num varchar,
+    fibre_addr_num_cp varchar,
+    fibre_addr_voie varchar,
+    fibre_addr_ld varchar,
+    fibre_addr_insee varchar,
+    fibre_commune varchar,
+    fibre_addr_fantoir varchar,
+    fibre_addr_source varchar
+);
+
+-- Table cuivre_ftthfc
+CREATE TABLE cuivre_ftthfc (
+    fibre_id integer primary key,
+    fibre_imb varchar,
+    cuivre_lot varchar,
+    cuivre_ft_on boolean,
+    cuivre_fc_on boolean,
+    cuivre_fcr_on boolean,
+    fibre_raccordable boolean,
+    cuivre_ft_annee varchar
 );
 
 -- Table cuivre_fibrepaths
@@ -64,6 +95,29 @@ CREATE TABLE cuivre_fibrepaths (
     fibre_id integer,
     fibre_imb varchar,
     path geometry
+);
+
+-- Tabe cuivre_fibre
+CREATE TABLE cuivre_fibre (
+    fibre_id integer primary key,
+    fibre_imb varchar,
+    fibre_addr_num varchar,
+    fibre_addr_num_cp varchar,
+    fibre_addr_voie_type varchar,
+    fibre_addr_voie varchar,
+    fibre_addr_bat varchar,
+    fibre_insee varchar,
+    fibre_commune varchar,
+    fibre_dept varchar,
+    fibre_imb_cat varchar,
+    fibre_imb_etat varchar,
+    fibre_pm varchar,
+    fibre_pm_etat varchar,
+    fibre_l33 varchar,
+    fibre_imb_type varchar,
+    fibre_point geometry,
+    fibre_cuivre_ft_on boolean,
+    fibre_cuivre_fcr_on boolean
 );
 
 -- Table cuivre_communes
