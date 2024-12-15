@@ -14,8 +14,9 @@ import KeyControl from './key/key.js'
 import WarningBox from './warning-box/warning-box.js'
 
 import map_style from './style/style.js'
-import style_base from './style/style_base.ts'
-import style_labels from './style/style_labels.js'
+//import style_base from './style/style_base.ts'
+//import style_labels from './style/style_labels.ts'
+import style_raster from './style/style_raster.ts'
 import {communesLayers as style_cu_communes} from './style/style_cu_communes.js';
 import {cuivreLayers as style_cu_cuivre} from './style/style_cu_cuivre.js'
 import {fibreLayers as style_cu_fibre} from './style/style_cu_fibre.js'
@@ -74,7 +75,7 @@ function init() {
   var url_hash = new URLHash(layer_switcher);
   layer_switcher.urlhash = url_hash;
 
-  map_style.layers = style_base.concat(cu_layers, style_labels);
+  map_style.layers = style_raster.concat(cu_layers);
 
   layer_switcher.setInitialVisibility(map_style);
 
