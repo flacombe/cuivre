@@ -21,7 +21,9 @@ const friendlyNames: { [key: string]: string } = {
     com_ft_ferme: 'Ferm. technique (ferme)',
     com_ftth_taux: 'Taux FTTH raccordable',
     com_loc_total: 'Locaux',
-    com_lot: 'Lot fermeture'
+    com_lot: 'Lot fermeture',
+    fibre_cuivre_fcr_on: 'Cu fermé commercial',
+    fibre_cuivre_ft_on: 'Cu fermé technique'
   }
   
   export default friendlyNames
