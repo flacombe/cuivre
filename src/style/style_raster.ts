@@ -4,10 +4,18 @@ import { LayerSpecificationWithZIndex } from './types.ts'
 const layers: LayerSpecificationWithZIndex[] = [
   {
     id: 'background',
+    type: 'background',
+    paint: {
+      'background-color': 'rgb(255, 255, 255)'
+    }
+  },
+  {
+    id: 'backmap',
     source: 'greyscale',
     type: 'raster',
     paint: {
-      'raster-saturation': -1
+      'raster-saturation': -1,
+      'raster-opacity': 0.75
     }
   }
 ]
