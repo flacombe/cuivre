@@ -125,28 +125,44 @@ psql -f db/ranking.sql
 
 Attention : la propagation des rangs aux adresses cuivre est une opération manipule une grande quantité de données, il peut être nécessaire de la spécialiser à un ou quelques départements en fonction de vos capacités et besoins et de répéter l'opération autant de fois que nécessaire.
 
+## Affinage des adresses cuivre
+
+La qualité des adresses cuivre peut empêcher un geocodage efficace. Il convient alors de compléter les intitulés de nature de voie.  
+On utilise pour cela le script `refine.sql`
+
+```bash
+psql -f db/refine.sql
+```
+
+L'ancien nom de voie n'est pas supprimé, le résultat est stocké dans la colonne `cuivre_voie_correct` auquel il faudra donner la priorité dans les exports sur `cuivre_voie`.
+
 ## Geocodage
 
 Les adresses cuivre doivent être géocodées.  
 Faute de mieux pour l'instant, on peut utiliser un service externe. L'export suivant peut être utile :
 
 ```bash
-psql -c "COPY(select distinct (cuivre_addrrank) as cuivre_addrrank, cuivre_num, cuivre_voie, cuivre_commune, cuivre_insee from cuivre_adresses) TO STDOUT WITH CSV HEADER;" > /tmp/adr.csv
+psql -c "COPY(select distinct (cuivre_addrrank) as cuivre_addrrank, cuivre_num, case when cuivre_voie_correct is not null then cuivre_voie_correct else cuivre_voie end as cuivre_voie, cuivre_commune, cuivre_insee from cuivre_adresses) TO STDOUT WITH CSV HEADER;" > /tmp/adr.csv
 ```
 
-Géocodez chaque adresse avec l'outil de votre choix.
+Géocodez chaque adresse avec l'outil de votre choix.  
+Le fichier résultat comporte 5 colonnes: le rank (voir ci-dessus), longitude, latitude, le score du géocodage et l'échelle
 
 On réintègre les résultats dans la table `cuivre_geocoded` selon le même principe :
 
 ```bash
-psql -c "COPY cuivre_geocoded (cuivre_addrrank, lat, lng) from stdin with csv header" < /tmp/adr_geocoded.csv
+psql -c "TRUNCATE cuivre_geocoded; COPY cuivre_geocoded (cuivre_addrrank, lng, lat, score, scale) from stdin with csv header" < /tmp/adr_geocoded.csv
 ```
 
 Les points géographiques sont enfin créés grâce à la requête :
 
 ```sql
 update cuivre_adresses a
-set cuivre_point=ST_MakePoint(g.lng, g.lat)
+set 
+    cuivre_point=ST_MakePoint(g.lng, g.lat), 
+    cuivre_point_3857=ST_Transform(ST_point(g.lng, g.lat, 4326), 3857),
+    cuivre_point_score=g.score,
+    cuivre_point_scale=g.scale
 from cuivre_geocoded g
 where g.cuivre_addrrank=a.cuivre_addrrank;
 ```
@@ -171,12 +187,12 @@ Il peut être utile de transformer les géométries vers le webmercator pour du 
 
 Import:
 ```bash
-psql -c "COPY cuivre_adresses(cuivre_addrrank, cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, cuivre_voie, cuivre_num, cuivre_point, cuivre_catreco, cuivre_fibre_distance, fibre_imb, fibre_l33, fibre_absente) from stdin with csv header;" < /tmp/cuivre_adresses.csv
+psql -c "COPY cuivre_adresses(cuivre_addrrank, cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, cuivre_voie, cuivre_num, cuivre_point, cuivre_point_3857, cuivre_point_score, cuivre_point_scale, cuivre_catreco, cuivre_fibre_distance, fibre_imb, fibre_l33, fibre_absente) from stdin with csv header;" < /tmp/cuivre_adresses.csv
 ```
 
 Export :
 ```bash
-psql -c "COPY(select distinct on (cuivre_addrrank) cuivre_addrrank, cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, cuivre_voie, cuivre_num, ST_AsText(cuivre_point) as cuivre_point, cuivre_catreco, cuivre_fibre_distance, fibre_imb, fibre_l33, fibre_absente from cuivre_adresses) TO STDOUT WITH CSV HEADER;" > /tmp/cuivre_adresses.csv
+psql -c "COPY(select distinct on (cuivre_addrrank) cuivre_addrrank, cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, case when cuivre_voie_correct is not null then cuivre_voie_correct else cuivre_voie end as cuivre_voie, cuivre_num, ST_AsText(cuivre_point) as cuivre_point, ST_AsText(cuivre_point_3857) as cuivre_point_3857, cuivre_point_score, cuivre_point_scale, cuivre_catreco, cuivre_fibre_distance, fibre_imb, fibre_l33, fibre_absente from cuivre_adresses) TO STDOUT WITH CSV HEADER;" > /tmp/cuivre_adresses.csv
 ```
 
 Lors d'un import on prendra soin de reconstruire les indexes prévus dans le fichier `db/preprocess.sql`
@@ -185,12 +201,12 @@ Lors d'un import on prendra soin de reconstruire les indexes prévus dans le fic
 
 Import :
 ```bash
-psql -c "COPY cuivre_fibre (fibre_id, fibre_imb, fibre_addr_num, fibre_addr_voie_type, fibre_addr_voie, fibre_addr_bat, fibre_insee, fibre_commune, fibre_dept, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_imb_type, fibre_point, fibre_cuivre_ft_on, fibre_cuivre_fcr_on) from stdin WITH CSV HEADER;" < /tmp/cuivre_fibre.csv
+psql -c "COPY cuivre_fibre (fibre_id, fibre_imb, fibre_addr_num, fibre_addr_voie_type, fibre_addr_voie, fibre_addr_bat, fibre_insee, fibre_commune, fibre_dept, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_imb_type, fibre_point, fibre_point_3857, fibre_cuivre_ft_on, fibre_cuivre_fcr_on) from stdin WITH CSV HEADER;" < /tmp/cuivre_fibre.csv
 ```
 
 Export :
 ```bash
-psql -c "COPY(select fibre_id, fibre_imb, fibre_addr_num, fibre_addr_voie_type, fibre_addr_voie, fibre_addr_bat, fibre_insee, fibre_commune, fibre_dept, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_imb_type, ST_AsText(St_Transform(fibre_point,'EPSG:4326', 'EPSG:3857')) as fibre_point, fibre_cuivre_ft_on, fibre_cuivre_fcr_on from cuivre_fibre) TO STDOUT WITH CSV HEADER;" > /tmp/cuivre_fibre.csv
+psql -c "COPY(select fibre_id, fibre_imb, fibre_addr_num, fibre_addr_voie_type, fibre_addr_voie, fibre_addr_bat, fibre_insee, fibre_commune, fibre_dept, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_imb_type, ST_AsText(fibre_point) as fibre_point, ST_AsText(fibre_point_3857) as fibre_point_3857, fibre_cuivre_ft_on, fibre_cuivre_fcr_on from cuivre_fibre) TO STDOUT WITH CSV HEADER;" > /tmp/cuivre_fibre.csv
 ```
 
 Lors d'un import on prendra soin de reconstruire les indexes prévus dans le fichier `db/fibredata.sql`
@@ -199,10 +215,10 @@ Lors d'un import on prendra soin de reconstruire les indexes prévus dans le fic
 
 Import :
 ```bash
-psql -c "COPY cuivre_fibrepaths (cuivre_addrrank, cuivre_catreco, fibre_id, fibre_imb, path) from stdin with csv header;" < /tmp/cuivre_fibrepaths.csv
+psql -c "COPY cuivre_fibrepaths (cuivre_addrrank, cuivre_catreco, fibre_id, fibre_imb, path, path_3857) from stdin with csv header;" < /tmp/cuivre_fibrepaths.csv
 ```
 
 Export :
 ```bash
-psql -c "COPY(select cuivre_addrrank, cuivre_catreco, fibre_id, fibre_imb, ST_AsText(path) as path from cuivre_fibrepaths) TO STDOUT WITH CSV HEADER;" > /tmp/cuivre_fibrepaths.csv
+psql -c "COPY(select cuivre_addrrank, cuivre_catreco, fibre_id, fibre_imb, ST_AsText(path) as path, ST_AsText(path_3857) as path_3857 from cuivre_fibrepaths) TO STDOUT WITH CSV HEADER;" > /tmp/cuivre_fibrepaths.csv
 ```

@@ -6,6 +6,8 @@ const friendlyNames: { [key: string]: string } = {
     cuivre_fibre_path: 'Relation cuivre/fibre',
     cuivre_catreco: 'Précision recoupement',
     cuivre_addrrank: 'Point cuivre',
+    cuivre_addrscore: 'Qualité géocodage',
+    cuivre_addrscale: 'Echelle géocodage',
     cuivre_lot: 'Lot fermeture',
     fibre_adresse: 'Adresse',
     fibre_imb: 'Immeuble ftth',

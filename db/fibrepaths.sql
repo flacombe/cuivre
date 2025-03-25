@@ -7,7 +7,8 @@ WITH data as (
         CASE WHEN ca.cuivre_catreco='Categorie 1' THEN 1 WHEN ca.cuivre_catreco='Categorie 2' THEN 2 END as cuivre_catreco,
         fi.fibre_id as fibre_id,
         ca.fibre_imb as fibre_imb,
-        ST_MakeLine(ca.cuivre_point, fi.fibre_point) as path
+        ST_MakeLine(ca.cuivre_point, fi.fibre_point) as path,
+        ST_MakeLine(ca.cuivre_point_3857, fi.fibre_point_3857) as path_3857
     FROM cuivre_adresses ca
     JOIN cuivre_fibre fi
         ON fi.fibre_imb=ca.fibre_imb
