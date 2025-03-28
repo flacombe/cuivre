@@ -1,0 +1,8 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="cuivre_fibrepaths">
+        <SrcDataSource>cuivre_fibrepaths.csv</SrcDataSource>
+        <GeometryType>wkbLineString</GeometryType>
+        <LayerSRS>WGS84</LayerSRS>
+        <GeometryField encoding="WKT" field="path" />
+    </OGRVRTLayer>
+</OGRVRTDataSource>
