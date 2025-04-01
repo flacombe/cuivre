@@ -6,9 +6,9 @@ update cuivre_adresses set
         WHEN cuivre_voie_nature='AV' THEN 'AVENUE'
         WHEN cuivre_voie_nature='AVE' THEN 'AVENUE'
         WHEN cuivre_voie_nature='BD' THEN 'BOULEVARD'
-        WHEN cuivre_voie_nature='BLV' THEN 'BOULEVARD',
-        WHEN cuivre_voie_nature='BLVD' THEN 'BOULEVARD',
-        WHEN cuivre_voie_nature='BRD' THEN 'BOULEVARD',
+        WHEN cuivre_voie_nature='BLV' THEN 'BOULEVARD'
+        WHEN cuivre_voie_nature='BLVD' THEN 'BOULEVARD'
+        WHEN cuivre_voie_nature='BRD' THEN 'BOULEVARD'
         WHEN cuivre_voie_nature='CHE' THEN 'CHEMIN'
         WHEN cuivre_voie_nature='CHEM' THEN 'CHEMIN'
         WHEN cuivre_voie_nature='CHEN' THEN 'CHEMINEMENT'
