@@ -1,0 +1,8 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="fibre_imb">
+        <SrcDataSource>cuivre_fibre.csv</SrcDataSource>
+        <GeometryType>wkbPoint</GeometryType>
+        <LayerSRS>WGS84</LayerSRS>
+        <GeometryField encoding="WKT" field="fibre_point" />
+    </OGRVRTLayer>
+</OGRVRTDataSource>

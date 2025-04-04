@@ -1,0 +1,8 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="cuivre_adresses">
+        <SrcDataSource>cuivre_adresses.csv</SrcDataSource>
+        <GeometryType>wkbPoint</GeometryType>
+        <LayerSRS>WGS84</LayerSRS>
+        <GeometryField encoding="WKT" field="cuivre_point" />
+    </OGRVRTLayer>
+</OGRVRTDataSource>

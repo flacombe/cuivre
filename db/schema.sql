@@ -9,11 +9,16 @@ CREATE TABLE cuivre_adresses (
     cuivre_dept varchar,
     cuivre_voie_code varchar,
     cuivre_voie varchar,
+    cuivre_voie_correct varchar,
+    cuivre_voie_nature varchar,
     cuivre_num varchar,
     cuivre_hexavia varchar,
     cuivre_voie_hexacle varchar,
     cuivre_num_hexacle varchar,
-    cuivre_point geometry,
+    cuivre_point geography,
+    cuivre_point_3857 geometry,
+    cuivre_point_score numeric,
+    cuivre_point_scale varchar,
     cuivre_catreco varchar,
     cuivre_fibre_distance numeric,
     fibre_l33 varchar,
@@ -26,7 +31,9 @@ CREATE TABLE cuivre_adresses (
 CREATE TABLE cuivre_geocoded (
     cuivre_addrrank integer,
     lat numeric,
-    lng numeric
+    lng numeric,
+    score numeric,
+    scale varchar
 );
 
 -- Table cuivre_ftthipe
@@ -94,7 +101,8 @@ CREATE TABLE cuivre_fibrepaths (
     cuivre_catreco integer,
     fibre_id integer,
     fibre_imb varchar,
-    path geometry
+    path geography,
+    path_3857 geometry
 );
 
 -- Tabe cuivre_fibre
@@ -115,7 +123,8 @@ CREATE TABLE cuivre_fibre (
     fibre_pm_etat varchar,
     fibre_l33 varchar,
     fibre_imb_type varchar,
-    fibre_point geometry,
+    fibre_point geography,
+    fibre_point_3857 geometry,
     fibre_cuivre_ft_on boolean,
     fibre_cuivre_fcr_on boolean
 );
