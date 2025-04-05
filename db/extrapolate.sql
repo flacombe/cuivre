@@ -4,7 +4,7 @@ SELECT distinct (cuivre_addrrank) as cuivre_addrrank,
     fibre_imb,
     null::geometry as cuivre_point
 FROM cuivre_adresses
-WHERE cuivre_adresses.cuivre_catereco='Categorie 1'
+WHERE cuivre_adresses.cuivre_catreco='Categorie 1'
     AND cuivre_adresses.cuivre_point is null;
 
 CREATE INDEX on cuivre_extrapolate using btree(fibre_imb);
@@ -12,7 +12,7 @@ CREATE INDEX on cuivre_extrapolate using btree(fibre_imb);
 -- Mise à jour de chaque addrrank unique
 update cuivre_extrapolate ce
 set 
-    cuivre_point=ST_Translate(cf.fibre_point, 0.00015, 0),
+    cuivre_point=ST_Translate(cf.fibre_point, 0.00015, 0)
 from cuivre_fibre cf
 where 
     cf.fibre_imb=ce.fibre_imb;
