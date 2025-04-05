@@ -138,7 +138,23 @@ L'ancien nom de voie n'est pas supprimé, le résultat est stocké dans la colon
 
 ## Geocodage
 
-Les adresses cuivre doivent être géocodées.  
+Les adresses cuivre doivent être géocodées. 
+
+### Extrapolation depuis la fibre
+
+Nous pouvons utiliser les positions fibres pour les adresses cuivre directement (catégorie 1) liées à des immeubles fibre.
+
+On utilise le script prévu pour faire ces liens :
+
+```bash
+psql -f db/extrapolate.sql
+```
+
+Le script ne remplacera pas des positions d'adresses précédemment connues, il ne complète que les adresses cuivre sans position connues.
+
+### Géocodage geographique
+
+Le reste des adresses non directement liées à la fibre doit être géocodée géographiquement.
 Faute de mieux pour l'instant, on peut utiliser un service externe. L'export suivant peut être utile :
 
 ```bash

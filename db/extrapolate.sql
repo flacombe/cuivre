@@ -12,7 +12,7 @@ CREATE INDEX on cuivre_extrapolate using btree(fibre_imb);
 -- Mise à jour de chaque addrrank unique
 update cuivre_extrapolate ce
 set 
-    cuivre_point=ST_Translate(cf.fibre_point, 0.00015, 0)
+    cuivre_point=ST_SetSRID(ST_Translate(cf.fibre_point, 0.00015, 0), 4326)
 from cuivre_fibre cf
 where 
     cf.fibre_imb=ce.fibre_imb;
