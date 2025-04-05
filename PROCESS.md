@@ -157,14 +157,14 @@ psql -c "TRUNCATE cuivre_geocoded; COPY cuivre_geocoded (cuivre_addrrank, lng, l
 Les points géographiques sont enfin créés grâce à la requête :
 
 ```sql
-update cuivre_adresses a
+update cuivre_adresses ca
 set 
-    cuivre_point=ST_MakePoint(g.lng, g.lat), 
-    cuivre_point_3857=ST_Transform(ST_point(g.lng, g.lat, 4326), 3857),
-    cuivre_point_score=g.score,
-    cuivre_point_scale=g.scale
-from cuivre_geocoded g
-where g.cuivre_addrrank=a.cuivre_addrrank;
+    cuivre_point=ST_MakePoint(cg.lng, cg.lat), 
+    cuivre_point_3857=ST_Transform(ST_point(cg.lng, cg.lat, 4326), 3857),
+    cuivre_point_score=cg.score,
+    cuivre_point_scale=cg.scale
+from cuivre_geocoded cg
+where cg.cuivre_addrrank=ca.cuivre_addrrank;
 ```
 
 ## Liens cuivre / fibre
