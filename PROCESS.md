@@ -158,7 +158,7 @@ Le reste des adresses non directement liées à la fibre doit être géocodée g
 Faute de mieux pour l'instant, on peut utiliser un service externe. L'export suivant peut être utile :
 
 ```bash
-psql -c "COPY(select distinct (cuivre_addrrank) as cuivre_addrrank, cuivre_num, case when cuivre_voie_correct is not null then cuivre_voie_correct else cuivre_voie end as cuivre_voie, cuivre_commune, cuivre_insee from cuivre_adresses) TO STDOUT WITH CSV HEADER;" > /tmp/adr.csv
+psql -c "COPY(select distinct (cuivre_addrrank) as cuivre_addrrank, cuivre_num, case when cuivre_voie_correct is not null then cuivre_voie_correct else cuivre_voie end as cuivre_voie, cuivre_commune, cuivre_insee from cuivre_adresses where cuivre_point is null order by cuivre_addrrank limit 200000) TO STDOUT WITH CSV HEADER;" > /tmp/adr.csv
 ```
 
 Géocodez chaque adresse avec l'outil de votre choix.  

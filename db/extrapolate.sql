@@ -4,7 +4,8 @@ SELECT distinct (cuivre_addrrank) as cuivre_addrrank,
     fibre_imb,
     null::geometry as cuivre_point
 FROM cuivre_adresses
-WHERE cuivre_adresses.cuivre_catreco='Categorie 1'
+WHERE cuivre_adresses.addrrank is not null
+    AND cuivre_adresses.cuivre_catreco='Categorie 1'
     AND cuivre_adresses.cuivre_point is null;
 
 CREATE INDEX on cuivre_extrapolate using btree(fibre_imb);
