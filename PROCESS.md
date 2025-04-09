@@ -175,7 +175,7 @@ Les points géographiques sont enfin créés grâce à la requête :
 ```sql
 update cuivre_adresses ca
 set 
-    cuivre_point=ST_MakePoint(cg.lng, cg.lat), 
+    cuivre_point=ST_setSRID(ST_MakePoint(cg.lng, cg.lat), 4326), 
     cuivre_point_3857=ST_Transform(ST_point(cg.lng, cg.lat, 4326), 3857),
     cuivre_point_score=cg.score,
     cuivre_point_scale=cg.scale

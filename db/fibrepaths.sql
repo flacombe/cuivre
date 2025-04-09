@@ -12,7 +12,7 @@ WITH data as (
     FROM cuivre_adresses ca
     JOIN cuivre_fibre fi
         ON fi.fibre_imb=ca.fibre_imb
-    WHERE ca.cuivre_point is not null and fi.fibre_point is not null)
+    WHERE ca.cuivre_point is not null and fi.fibre_point is not null and ca.cuivre_catreco IN ('Categorie 1', 'Categorie 2') and ca.fibre_imb is not null)
 INSERT INTO cuivre_fibrepaths (cuivre_addrrank, cuivre_catreco, fibre_id, fibre_imb, path, path_3857)
 SELECT d.cuivre_addrrank, d.cuivre_catreco, d.fibre_id, d.fibre_imb, d.path, d.path_3857
 FROM data d;
