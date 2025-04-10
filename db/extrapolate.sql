@@ -9,6 +9,7 @@ WHERE cuivre_adresses.cuivre_addrrank is not null
     AND cuivre_adresses.cuivre_point is null;
 
 CREATE INDEX on cuivre_extrapolate using btree(fibre_imb);
+CREATE INDEX on cuivre_extrapolate using btree(cuivre_addrrank);
 
 -- Mise à jour de chaque addrrank unique
 update cuivre_extrapolate ce

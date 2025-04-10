@@ -31,6 +31,7 @@ update cuivre_adresses set
         WHEN cuivre_voie_nature='PLA' THEN 'PLACE'
         WHEN cuivre_voie_nature='PR' THEN 'PROMENADE'
         WHEN cuivre_voie_nature='PROM' THEN 'PROMENADE'
+        WHEN cuivre_voie_nature='QUA' THEN 'QUAI'
         WHEN cuivre_voie_nature='R' THEN 'RUE'
         WHEN cuivre_voie_nature='RDPT' THEN 'ROND-POINT'
         WHEN cuivre_voie_nature='RES' THEN 'RESIDENCE'
@@ -40,4 +41,4 @@ update cuivre_adresses set
         WHEN cuivre_voie_nature='TRA' THEN 'TRAVERSE'
         WHEN cuivre_voie_nature='VEN' THEN 'VENELLE'
         END)
-WHERE split_part(cuivre_voie,' ',1) IN ('ALL', 'AV', 'AVE', 'BD', 'BLD', 'BLVD', 'BRD', 'CHE', 'CHEM', 'CHEN', 'CL', 'CRS', 'DOM', 'ESC', 'ESP', 'FBG', 'HAM', 'IMP', 'LOT', 'MON', 'MTE', 'PAS', 'PASS', 'PCE', 'PGE', 'PL', 'PLA', 'PR', 'PROM', 'R', 'RDPT', 'RES', 'RESID', 'RTE', 'SQ', 'TRA', 'VEN');
+WHERE split_part(cuivre_voie,' ',1) IN ('ALL', 'AV', 'AVE', 'BD', 'BLD', 'BLVD', 'BRD', 'CHE', 'CHEM', 'CHEN', 'CL', 'CRS', 'DOM', 'ESC', 'ESP', 'FBG', 'HAM', 'IMP', 'LOT', 'MON', 'MTE', 'PAS', 'PASS', 'PCE', 'PGE', 'PL', 'PLA', 'PR', 'PROM', 'QUA', 'R', 'RDPT', 'RES', 'RESID', 'RTE', 'SQ', 'TRA', 'VEN');
