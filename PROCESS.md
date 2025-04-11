@@ -33,7 +33,7 @@ Il s'agit de télécharger les fichiers aux différentes sources, de les prépar
 
 Le fichier de programmation des communes est disponible en ligne, sur [le site institutionnel](https://gallery.orange.com/reseaux/?v=11c9b041-420b-47f3-8a91-8a9adbe2a86a) du groupe Orange.
 
-On prendra soin de supprimer les colonnes suivantes pour produire un fichier csv :
+On prendra soin de supprimer les colonnes suivantes de l'onglet communes pour produire un fichier csv :
 * nom_departement
 * libelle_epci
 * dispo_offre_alt

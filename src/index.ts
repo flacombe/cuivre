@@ -66,11 +66,11 @@ function init() {
   })
 
   const layers = {
-    'Communes': 'communes_',
-    'Cuivre': 'cuivre_',
-    'Fibre': 'fibre_',
+    'Communes février 2025': 'communes_',
+    'Cuivre mars 2025': 'cuivre_',
+    'Fibre T4 2024': 'fibre_',
   };
-  const layers_enabled = ['Communes', 'Cuivre', 'Fibre'];
+  const layers_enabled = Object.keys(layers);
   const layer_switcher = new LayerSwitcher(layers, layers_enabled);
   var url_hash = new URLHash(layer_switcher);
   layer_switcher.urlhash = url_hash;

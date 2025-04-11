@@ -21,7 +21,14 @@ const layers: LayerSpecificationWithZIndex[] = [
       'circle-radius': dotRadius_p,
       'circle-color': cuivreColor,
       'circle-stroke-color': "#9C9C9C",
-      'circle-stroke-width': dotStroke_p
+      'circle-stroke-width': dotStroke_p,
+      'circle-opacity': ["match",
+        ["get", "cuivre_point_scale"],
+        "ftth", 0.5,
+        "locality", 0.5,
+        "municipality", 0.5,
+        1
+      ]
     }
   },
   {
