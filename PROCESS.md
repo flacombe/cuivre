@@ -183,6 +183,26 @@ from cuivre_geocoded cg
 where cg.cuivre_addrrank=ca.cuivre_addrrank;
 ```
 
+## Mise à jour partielle
+
+Orange est suceptible de publier des mises à jour partielles des adresses cuivre par lot. C'est le cas à partir du lot 4, en date du 31 mars 2025.
+
+Des opérations spéciales doivent être accomplies pour tenir la liste nationale des adresses à jour :
+* Création d'une table `cuivre_adresses_maj` conforme au schéma de `cuivre_adresses`.
+* Charger le fichier de mise à jour selon la commande ci-dessus de chargement initial des adresses cuivre de la base nationale
+* Ranking, enrichissement puis rapprochement des adresses des positions fibre selon les opérations décrites ci-dessus
+* Géocodage si nécessaire des positions restantes.
+* Suppression des adresses de la base nationale sur les communes concernées par la mise à jour
+```sql
+delete from cuivre_adresses where cuivre_insee IN (select distinct cuivre_insee from cuivre_adresses_maj);
+```
+* Transfert des adresses mises à jour dans la base nationale
+```sql
+insert into cuivre_adresses (cuivre_addrrank, cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, cuivre_voie, cuivre_voie_correct, cuivre_voie_nature, cuivre_num, cuivre_hexavia, cuivre_voie_hexacle, cuivre_num_hexacle, cuivre_point, cuivre_point_3857, cuivre_point_score, cuivre_point_scale, cuivre_catreco, cuivre_fibre_distance, fibre_l33, fibre_imb, fibre_absente, meta_traitement) 
+    select cuivre_addrrank, cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, cuivre_voie, cuivre_voie_correct, cuivre_voie_nature, cuivre_num, cuivre_hexavia, cuivre_voie_hexacle, cuivre_num_hexacle, cuivre_point, cuivre_point_3857, cuivre_point_score, cuivre_point_scale, cuivre_catreco, cuivre_fibre_distance, fibre_l33, fibre_imb, fibre_absente, meta_traitement
+    from cuivre_adresses_maj;
+```
+
 ## Liens cuivre / fibre
 
 Bien que les données cuivre référencent les adresses fibres, il faut constituer des géométries reliant les deux.
