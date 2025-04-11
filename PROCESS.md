@@ -138,11 +138,27 @@ L'ancien nom de voie n'est pas supprimé, le résultat est stocké dans la colon
 
 ## Geocodage
 
-Les adresses cuivre doivent être géocodées.  
+Les adresses cuivre doivent être géocodées. 
+
+### Extrapolation depuis la fibre
+
+Nous pouvons utiliser les positions fibres pour les adresses cuivre directement (catégorie 1) liées à des immeubles fibre.
+
+On utilise le script prévu pour faire ces liens :
+
+```bash
+psql -f db/extrapolate.sql
+```
+
+Le script ne remplacera pas des positions d'adresses précédemment connues, il ne complète que les adresses cuivre sans position connues.
+
+### Géocodage geographique
+
+Le reste des adresses non directement liées à la fibre doit être géocodée géographiquement.
 Faute de mieux pour l'instant, on peut utiliser un service externe. L'export suivant peut être utile :
 
 ```bash
-psql -c "COPY(select distinct (cuivre_addrrank) as cuivre_addrrank, cuivre_num, case when cuivre_voie_correct is not null then cuivre_voie_correct else cuivre_voie end as cuivre_voie, cuivre_commune, cuivre_insee from cuivre_adresses) TO STDOUT WITH CSV HEADER;" > /tmp/adr.csv
+psql -c "COPY(select distinct (cuivre_addrrank) as cuivre_addrrank, cuivre_num, case when cuivre_voie_correct is not null then cuivre_voie_correct else cuivre_voie end as cuivre_voie, cuivre_commune, cuivre_insee from cuivre_adresses where cuivre_point is null order by cuivre_addrrank limit 200000) TO STDOUT WITH CSV HEADER;" > /tmp/adr.csv
 ```
 
 Géocodez chaque adresse avec l'outil de votre choix.  
@@ -157,14 +173,14 @@ psql -c "TRUNCATE cuivre_geocoded; COPY cuivre_geocoded (cuivre_addrrank, lng, l
 Les points géographiques sont enfin créés grâce à la requête :
 
 ```sql
-update cuivre_adresses a
+update cuivre_adresses ca
 set 
-    cuivre_point=ST_MakePoint(g.lng, g.lat), 
-    cuivre_point_3857=ST_Transform(ST_point(g.lng, g.lat, 4326), 3857),
-    cuivre_point_score=g.score,
-    cuivre_point_scale=g.scale
-from cuivre_geocoded g
-where g.cuivre_addrrank=a.cuivre_addrrank;
+    cuivre_point=ST_setSRID(ST_MakePoint(cg.lng, cg.lat), 4326), 
+    cuivre_point_3857=ST_Transform(ST_point(cg.lng, cg.lat, 4326), 3857),
+    cuivre_point_score=cg.score,
+    cuivre_point_scale=cg.scale
+from cuivre_geocoded cg
+where cg.cuivre_addrrank=ca.cuivre_addrrank;
 ```
 
 ## Liens cuivre / fibre

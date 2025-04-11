@@ -19,7 +19,7 @@ with data as (
     fp.fibre_pm_etat,
     fp.fibre_l33,
     fp.fibre_imb_type,
-    ST_MakePoint(fp.fibre_lng, fp.fibre_lat) as fibre_point,
+    ST_SetSRID(ST_MakePoint(fp.fibre_lng, fp.fibre_lat), 4326) as fibre_point,
     ST_Transform(ST_Point(fp.fibre_lng, fp.fibre_lat, 4326), 3857) as fibre_point_3857,
     fc.cuivre_fcr_on as fibre_cuivre_fcr_on,
     fc.cuivre_ft_on as fibre_cuivre_ft_on
