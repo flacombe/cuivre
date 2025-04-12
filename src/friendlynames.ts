@@ -1,7 +1,7 @@
 // Map layer names to a descriptive string to show in the infobox
 const friendlyNames: { [key: string]: string } = {
     cuivre_adresses: 'Adresse cuivre',
-    fibre_adresses: 'Adresse fibre',
+    fibre_adresses: 'Immeuble fibre',
     cuivre_adresse: 'Adresse',
     cuivre_fibre_path: 'Relation cuivre/fibre',
     cuivre_catreco: 'Précision recoupement',
