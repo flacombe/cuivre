@@ -223,7 +223,7 @@ Il peut être utile de transformer les géométries vers le webmercator pour du 
 
 Import:
 ```bash
-psql -c "COPY cuivre_adresses(cuivre_addrrank, cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, cuivre_voie, cuivre_num, cuivre_point, cuivre_point_3857, cuivre_point_score, cuivre_point_scale, cuivre_catreco, cuivre_fibre_distance, fibre_imb, fibre_l33, fibre_absente) from stdin with csv header;" < /tmp/cuivre_adresses.csv
+psql -c "TRUNCATE cuivre_adresses; COPY cuivre_adresses(cuivre_addrrank, cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, cuivre_voie, cuivre_num, cuivre_point, cuivre_point_3857, cuivre_point_score, cuivre_point_scale, cuivre_catreco, cuivre_fibre_distance, fibre_imb, fibre_l33, fibre_absente) from stdin with csv header;" < /tmp/cuivre_adresses.csv
 ```
 
 Export :
@@ -237,7 +237,7 @@ Lors d'un import on prendra soin de reconstruire les indexes prévus dans le fic
 
 Import :
 ```bash
-psql -c "COPY cuivre_fibre (fibre_id, fibre_imb, fibre_addr_num, fibre_addr_voie_type, fibre_addr_voie, fibre_addr_bat, fibre_insee, fibre_commune, fibre_dept, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_imb_type, fibre_point, fibre_point_3857, fibre_cuivre_ft_on, fibre_cuivre_fcr_on) from stdin WITH CSV HEADER;" < /tmp/cuivre_fibre.csv
+psql -c "TRUNCATE TABLE cuivre_fibre; COPY cuivre_fibre (fibre_id, fibre_imb, fibre_addr_num, fibre_addr_voie_type, fibre_addr_voie, fibre_addr_bat, fibre_insee, fibre_commune, fibre_dept, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_imb_type, fibre_point, fibre_point_3857, fibre_cuivre_ft_on, fibre_cuivre_fcr_on) from stdin WITH CSV HEADER;" < /tmp/cuivre_fibre.csv
 ```
 
 Export :
@@ -251,7 +251,7 @@ Lors d'un import on prendra soin de reconstruire les indexes prévus dans le fic
 
 Import :
 ```bash
-psql -c "COPY cuivre_fibrepaths (cuivre_addrrank, cuivre_catreco, fibre_id, fibre_imb, path, path_3857) from stdin with csv header;" < /tmp/cuivre_fibrepaths.csv
+psql -c "TRUNCATE TABLE cuivre_fibrepaths; COPY cuivre_fibrepaths (cuivre_addrrank, cuivre_catreco, fibre_id, fibre_imb, path, path_3857) from stdin with csv header;" < /tmp/cuivre_fibrepaths.csv
 ```
 
 Export :
