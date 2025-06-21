@@ -68,11 +68,11 @@ function init() {
   const layers = {
     'Communes juin 2025': 'communes_',
     'Cuivre mars 2025': 'cuivre_adresses_',
-    'Liens cuivre-fibre': 'cuivre_fibre',
-    'Liens cuivre-fibre erreur': 'cuivre_fibre_path_error',
+    'Recoupement cuivre-fibre': 'cuivre_fibre',
+    'Erreurs recoupements': 'cuivre_fibre_path_error',
     'Fibre T4 2024': 'fibre_',
   };
-  const layers_enabled = ['Communes juin 2025', 'Cuivre mars 2025', 'Liens cuivre-fibre', 'Fibre T4 2024'];
+  const layers_enabled = ['Communes juin 2025', 'Cuivre mars 2025', 'Recoupement cuivre-fibre', 'Fibre T4 2024'];
   const layer_switcher = new LayerSwitcher(layers, layers_enabled);
   var url_hash = new URLHash(layer_switcher);
   layer_switcher.urlhash = url_hash;
