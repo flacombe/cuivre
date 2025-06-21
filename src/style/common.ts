@@ -60,7 +60,7 @@ const lotColor_scale = [
   // ["5", "#ff802e"],
   // ["6", "#ff761e"],
   // ["7", "#ff5500"],
-  // ["Preselectionlot5", "#d40000"],
+  ["Preselectionlot5", "#d40000"],
   // ["Preselectionlot6", "#d40000"],
   // ["Preselectionlot7", "#d40000"],
   [null,"#303030"]

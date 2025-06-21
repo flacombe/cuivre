@@ -67,7 +67,9 @@ function init() {
 
   const layers = {
     'Communes février 2025': 'communes_',
-    'Cuivre mars 2025': 'cuivre_',
+    'Cuivre mars 2025': 'cuivre_adresses',
+    'Liens cuivre-fibre': 'cuivre_fibre',
+    'Liens cuivre-fibre erreur': 'cuivre_fibre_path_error',
     'Fibre T4 2024': 'fibre_',
   };
   const layers_enabled = Object.keys(layers);
