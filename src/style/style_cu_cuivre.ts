@@ -12,7 +12,8 @@ const catReco_scale = [
 
 const errorReco_scale = [
   ['length', "#ff5efe"],
-  ['link_street', "#ffd900"]
+  ['link_street', "#ffd900"],
+  [null,"#DD0000"]
 ];
 
 const layers: LayerSpecificationWithZIndex[] = [
