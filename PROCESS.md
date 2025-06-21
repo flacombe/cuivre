@@ -33,7 +33,7 @@ Il s'agit de télécharger les fichiers aux différentes sources, de les prépar
 
 Le fichier de programmation des communes est disponible en ligne, sur [le site institutionnel](https://gallery.orange.com/reseaux/?v=11c9b041-420b-47f3-8a91-8a9adbe2a86a) du groupe Orange.
 
-On prendra soin de supprimer les colonnes suivantes pour produire un fichier csv :
+On prendra soin de supprimer les colonnes suivantes de l'onglet communes pour produire un fichier csv :
 * nom_departement
 * libelle_epci
 * dispo_offre_alt
@@ -183,6 +183,26 @@ from cuivre_geocoded cg
 where cg.cuivre_addrrank=ca.cuivre_addrrank;
 ```
 
+## Mise à jour partielle
+
+Orange est suceptible de publier des mises à jour partielles des adresses cuivre par lot. C'est le cas à partir du lot 4, en date du 31 mars 2025.
+
+Des opérations spéciales doivent être accomplies pour tenir la liste nationale des adresses à jour :
+* Création d'une table `cuivre_adresses_maj` conforme au schéma de `cuivre_adresses`.
+* Charger le fichier de mise à jour selon la commande ci-dessus de chargement initial des adresses cuivre de la base nationale
+* Ranking, enrichissement puis rapprochement des adresses des positions fibre selon les opérations décrites ci-dessus
+* Géocodage si nécessaire des positions restantes.
+* Suppression des adresses de la base nationale sur les communes concernées par la mise à jour
+```sql
+delete from cuivre_adresses where cuivre_insee IN (select distinct cuivre_insee from cuivre_adresses_maj);
+```
+* Transfert des adresses mises à jour dans la base nationale
+```sql
+insert into cuivre_adresses (cuivre_addrrank, cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, cuivre_voie, cuivre_voie_correct, cuivre_voie_nature, cuivre_num, cuivre_hexavia, cuivre_voie_hexacle, cuivre_num_hexacle, cuivre_point, cuivre_point_3857, cuivre_point_score, cuivre_point_scale, cuivre_catreco, cuivre_fibre_distance, fibre_l33, fibre_imb, fibre_absente, meta_traitement) 
+    select cuivre_addrrank, cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, cuivre_voie, cuivre_voie_correct, cuivre_voie_nature, cuivre_num, cuivre_hexavia, cuivre_voie_hexacle, cuivre_num_hexacle, cuivre_point, cuivre_point_3857, cuivre_point_score, cuivre_point_scale, cuivre_catreco, cuivre_fibre_distance, fibre_l33, fibre_imb, fibre_absente, meta_traitement
+    from cuivre_adresses_maj;
+```
+
 ## Liens cuivre / fibre
 
 Bien que les données cuivre référencent les adresses fibres, il faut constituer des géométries reliant les deux.
@@ -203,7 +223,7 @@ Il peut être utile de transformer les géométries vers le webmercator pour du 
 
 Import:
 ```bash
-psql -c "COPY cuivre_adresses(cuivre_addrrank, cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, cuivre_voie, cuivre_num, cuivre_point, cuivre_point_3857, cuivre_point_score, cuivre_point_scale, cuivre_catreco, cuivre_fibre_distance, fibre_imb, fibre_l33, fibre_absente) from stdin with csv header;" < /tmp/cuivre_adresses.csv
+psql -c "TRUNCATE cuivre_adresses; COPY cuivre_adresses(cuivre_addrrank, cuivre_lot, cuivre_commune, cuivre_insee, cuivre_iris, cuivre_dept, cuivre_voie_code, cuivre_voie, cuivre_num, cuivre_point, cuivre_point_3857, cuivre_point_score, cuivre_point_scale, cuivre_catreco, cuivre_fibre_distance, fibre_imb, fibre_l33, fibre_absente) from stdin with csv header;" < /tmp/cuivre_adresses.csv
 ```
 
 Export :
@@ -217,7 +237,7 @@ Lors d'un import on prendra soin de reconstruire les indexes prévus dans le fic
 
 Import :
 ```bash
-psql -c "COPY cuivre_fibre (fibre_id, fibre_imb, fibre_addr_num, fibre_addr_voie_type, fibre_addr_voie, fibre_addr_bat, fibre_insee, fibre_commune, fibre_dept, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_imb_type, fibre_point, fibre_point_3857, fibre_cuivre_ft_on, fibre_cuivre_fcr_on) from stdin WITH CSV HEADER;" < /tmp/cuivre_fibre.csv
+psql -c "TRUNCATE TABLE cuivre_fibre; COPY cuivre_fibre (fibre_id, fibre_imb, fibre_addr_num, fibre_addr_voie_type, fibre_addr_voie, fibre_addr_bat, fibre_insee, fibre_commune, fibre_dept, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_imb_type, fibre_point, fibre_point_3857, fibre_cuivre_ft_on, fibre_cuivre_fcr_on) from stdin WITH CSV HEADER;" < /tmp/cuivre_fibre.csv
 ```
 
 Export :
@@ -231,7 +251,7 @@ Lors d'un import on prendra soin de reconstruire les indexes prévus dans le fic
 
 Import :
 ```bash
-psql -c "COPY cuivre_fibrepaths (cuivre_addrrank, cuivre_catreco, fibre_id, fibre_imb, path, path_3857) from stdin with csv header;" < /tmp/cuivre_fibrepaths.csv
+psql -c "TRUNCATE TABLE cuivre_fibrepaths; COPY cuivre_fibrepaths (cuivre_addrrank, cuivre_catreco, fibre_id, fibre_imb, path, path_3857) from stdin with csv header;" < /tmp/cuivre_fibrepaths.csv
 ```
 
 Export :
