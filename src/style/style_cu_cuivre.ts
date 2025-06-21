@@ -24,7 +24,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     source: 'cuivre',
     minzoom: 11,
     'source-layer': 'cuivre_adresses',
-    filter: ['==', ['get', 'fibre_absente'], false],
+    filter: ['any', ['==', ['get', 'fibre_absente'], false], ['!', ['has', 'fibre_absente']]],
     paint: {
       'circle-radius': dotRadius_p,
       'circle-color': cuivreColor,
