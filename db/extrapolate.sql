@@ -6,7 +6,10 @@ SELECT distinct (cuivre_addrrank) as cuivre_addrrank,
 FROM cuivre_adresses
 WHERE cuivre_adresses.cuivre_addrrank is not null
     AND cuivre_adresses.cuivre_catreco='Categorie 1'
-    AND cuivre_adresses.cuivre_point is null;
+    AND (
+        cuivre_adresses.cuivre_point is null
+        OR cuivre_adresses.cuivre_point_scale IN ('street', 'municipality', 'locality', 'ftth')
+    );
 
 CREATE INDEX on cuivre_extrapolate using btree(fibre_imb);
 CREATE INDEX on cuivre_extrapolate using btree(cuivre_addrrank);
