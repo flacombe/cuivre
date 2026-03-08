@@ -2,6 +2,8 @@ import './index.css'
 import maplibregl from 'maplibre-gl'
 import { mount } from 'redom'
 
+import $ from "jquery";
+
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -81,6 +83,10 @@ function init() {
 
   layer_switcher.setInitialVisibility(map_style);
 
+  // Disclaimer
+  $('#disclaimerModal').modal('show');
+
+  // Map
   const map = new maplibregl.Map(
     url_hash.init({
       container: 'map',
