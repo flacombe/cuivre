@@ -66,11 +66,13 @@ function init() {
   })
 
   const layers = {
-    'Communes février 2025': 'communes_',
-    'Cuivre mars 2025': 'cuivre_',
-    'Fibre T4 2024': 'fibre_',
+    'Communes juin 2025': 'communes_',
+    'Cuivre mars 2025': 'cuivre_adresses_',
+    'Recoupement cuivre-fibre': 'cuivre_fibre',
+    'Erreurs recoupements': 'cuivre_fibre_path_error',
+    'Fibre T1 2025': 'fibre_',
   };
-  const layers_enabled = Object.keys(layers);
+  const layers_enabled = ['Communes juin 2025', 'Cuivre mars 2025', 'Recoupement cuivre-fibre', 'Fibre T1 2025'];
   const layer_switcher = new LayerSwitcher(layers, layers_enabled);
   var url_hash = new URLHash(layer_switcher);
   layer_switcher.urlhash = url_hash;

@@ -9,3 +9,4 @@ CREATE INDEX ON cuivre_adresses using gist(cuivre_point);
 CREATE INDEX ON cuivre_adresses using gist(cuivre_point_3857);
 CREATE INDEX ON cuivre_ftthipe using btree(fibre_imb);
 CREATE INDEX ON cuivre_ftthimb using btree(fibre_imb);
+CREATE INDEX ON cuivre_ftthfc using btree(fibre_imb);

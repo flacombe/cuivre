@@ -54,6 +54,7 @@ CREATE TABLE cuivre_ftthipe (
     fibre_l33 varchar,
     fibre_geom_mod varchar,
     fibre_imb_type varchar,
+    fibre_nbloc numeric,
     fibre_date_completude date,
     fibre_date_completude_manquante varchar,
     fibre_lng numeric,
@@ -101,6 +102,7 @@ CREATE TABLE cuivre_fibrepaths (
     cuivre_catreco integer,
     fibre_id integer,
     fibre_imb varchar,
+    error varchar,
     path geography,
     path_3857 geometry
 );

@@ -138,9 +138,13 @@ class KeyControl implements IControl {
 
   cuivreTable() {
     const rows = [
-      ['Adresse', svgCircleFromLayer(cuivreLayers, 'cuivre_adresses')],
+      ['Adresse', svgCircleFromLayer(cuivreLayers, 'cuivre_adresses_ftth')],
+      ['Adresse sans fibre', svgCircleFromLayer(cuivreLayers, 'cuivre_adresses_noftth')],
       ['Recoupement direct', svgLine("#666666", 5)],
-      ['Recoupement réseau', svgLine("#A9A9A9", 5)]
+      ['Recoupement plausible', svgLine("#A9A9A9", 5)],
+      ['Recoupement > 100m', svgLine("#ff5efe", 5)],
+      ['Recoupement approximatif', svgLine("#ffd900", 5)],
+      ['Erreur recoupement', svgLine("#dd0000", 5)]
     ]
 
     const table = list('table', Tr)

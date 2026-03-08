@@ -54,7 +54,10 @@ On prendra soin de supprimer les colonnes suivantes de l'onglet communes pour pr
 * int_occ_cuivre
 * tx_occ_cuivre
 
-Il faut également modifier le format de dates des colonnes qui en contiennent pour passer du format français (JJ/MM/AAAA) au format [RFC9333](https://www.rfc-editor.org/rfc/rfc3339) (AAAA-MM-JJ).
+Il faut également opérer les modifications suivantes :
+* Remplacer le format de dates des colonnes qui en contiennent pour passer du format français (JJ/MM/AAAA) au format [RFC9333](https://www.rfc-editor.org/rfc/rfc3339) (AAAA-MM-JJ).
+* Les valeurs booléennes Oui/Non en 1/0.
+* Les valeurs en pourcentage à ramener au format décimal (séparateur .)
 
 ```bash
 psql -c "TRUNCATE cuivre_communes; COPY cuivre_communes(com_insee, com_subdiv, com_nom, com_dept, com_epci, com_ftth, com_lot, com_fc_annonce, com_ft_annonce, com_adaptsav_annonce, com_fc_report, com_fc_initiale, com_ft_initiale, com_fc_ferme, com_ft_ferme, com_adaptsav_ferme, com_ftth_taux, com_loc_ref, com_imb_ref, com_loc_total, com_loc_deployes, com_loc_construction, com_loc_nonrac, com_imb_nonrac, com_loc_construction_nonrac, com_loc_rad, com_loc_rad_tarifspe, com_loc_refustiers, com_loc_blocage, com_oi) from stdin with csv header;" < ./communes_cuivre.csv
@@ -73,7 +76,7 @@ psql -c "TRUNCATE cuivre_adresses; COPY cuivre_adresses(cuivre_lot, cuivre_commu
 L'IPE fibre correspond à la collecte des fichiers IPE par l'ARCEP, publiés et mis à jour tous les trimestres [sur data.gouv](https://www.data.gouv.fr/fr/datasets/le-marche-du-haut-et-tres-haut-debit-fixe-deploiements/).
 
 ```bash
-psql -c "TRUNCATE cuivre_ftthipe; COPY cuivre_ftthipe(fibre_lng, fibre_lat, fibre_imb, fibre_addr_num, fibre_addr_num_cp, fibre_addr_voie_type, fibre_addr_voie, fibre_addr_bat, fibre_insee, fibre_addr_postal, fibre_commune, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_geom_mod, fibre_imb_type, fibre_date_completude, fibre_date_completude_manquante) from stdin DELIMITER ',' CSV HEADER;" < ./carte_fibre_immeubles_2024_1_20240613.csv
+psql -c "TRUNCATE cuivre_ftthipe; COPY cuivre_ftthipe(fibre_lng, fibre_lat, fibre_imb, fibre_addr_num, fibre_addr_num_cp, fibre_addr_voie_type, fibre_addr_voie, fibre_addr_bat, fibre_insee, fibre_addr_postal, fibre_commune, fibre_imb_cat, fibre_imb_etat, fibre_pm, fibre_pm_etat, fibre_l33, fibre_geom_mod, fibre_imb_type, fibre_nbloc, fibre_date_completude, fibre_date_completude_manquante) from stdin DELIMITER ',' CSV HEADER;" < ./carte_fibre_immeubles_2024_1_20240613.csv
 ```
 
 ### La base immeuble fibre
@@ -150,7 +153,11 @@ On utilise le script prévu pour faire ces liens :
 psql -f db/extrapolate.sql
 ```
 
-Le script ne remplacera pas des positions d'adresses précédemment connues, il ne complète que les adresses cuivre sans position connues.
+Le script ne remplacera pas des positions d'adresses précédemment connues, il ne complète que les adresses cuivre sans position connues.  
+Il arbitre également sur le remplacement des adresses avec un géocodage imprécis, si un immeuble fibre est rapproché :
+* Adresse cuivre avec une précision `street` et un immeuble fibre => on conserve la fibre
+* Adresse cuivre avec une précision `locality` et un immeuble fibre => on conserve la fibre
+* Adresse cuivre avec une précision `municipality` et un immeuble fibre => on conserve la fibre
 
 ### Géocodage geographique
 
@@ -251,10 +258,10 @@ Lors d'un import on prendra soin de reconstruire les indexes prévus dans le fic
 
 Import :
 ```bash
-psql -c "TRUNCATE TABLE cuivre_fibrepaths; COPY cuivre_fibrepaths (cuivre_addrrank, cuivre_catreco, fibre_id, fibre_imb, path, path_3857) from stdin with csv header;" < /tmp/cuivre_fibrepaths.csv
+psql -c "TRUNCATE TABLE cuivre_fibrepaths; COPY cuivre_fibrepaths (cuivre_addrrank, cuivre_catreco, fibre_id, fibre_imb, error, path, path_3857) from stdin with csv header;" < /tmp/cuivre_fibrepaths.csv
 ```
 
 Export :
 ```bash
-psql -c "COPY(select cuivre_addrrank, cuivre_catreco, fibre_id, fibre_imb, ST_AsText(path) as path, ST_AsText(path_3857) as path_3857 from cuivre_fibrepaths) TO STDOUT WITH CSV HEADER;" > /tmp/cuivre_fibrepaths.csv
+psql -c "COPY(select cuivre_addrrank, cuivre_catreco, fibre_id, fibre_imb, error, ST_AsText(path) as path, ST_AsText(path_3857) as path_3857 from cuivre_fibrepaths) TO STDOUT WITH CSV HEADER;" > /tmp/cuivre_fibrepaths.csv
 ```
