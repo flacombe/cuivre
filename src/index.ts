@@ -81,6 +81,15 @@ function init() {
 
   layer_switcher.setInitialVisibility(map_style);
 
+  // Disclaimer modal
+  $('#disclaimerModal').modal ({
+    backdrop: 'static',
+    keyboard: false,
+    focus: true,
+    show: true
+  });
+
+  // Map
   const map = new maplibregl.Map(
     url_hash.init({
       container: 'map',
